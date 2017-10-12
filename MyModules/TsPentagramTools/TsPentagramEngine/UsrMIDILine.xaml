@@ -1,0 +1,30 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="TsPentagramEngine.UsrMIDILine"
+	x:Name="UserControl" Height="22" Width="476.5">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="38"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Viewbox Stretch="Fill">
+			<TextBlock x:Name="txtName" TextWrapping="Wrap" Text="Ab1" FontFamily="Consolas" Background="#FF008BFF" Foreground="White"/>
+		</Viewbox>
+		<Canvas x:Name="canvasPaint" Grid.Column="1">
+			<Canvas.Background>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FF6674FF"/>
+					<GradientStop Color="#FF6674FF" Offset="1"/>
+					<GradientStop Color="White" Offset="0.513"/>
+					<GradientStop Color="White" Offset="0.022"/>
+					<GradientStop Color="White" Offset="0.978"/>
+				</LinearGradientBrush>
+			</Canvas.Background>
+		</Canvas>
+	</Grid>
+</UserControl>

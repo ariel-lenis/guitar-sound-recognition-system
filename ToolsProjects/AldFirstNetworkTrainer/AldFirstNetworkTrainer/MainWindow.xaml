@@ -1,0 +1,138 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:AldWavDisplayTools="clr-namespace:AldWavDisplayTools;assembly=AldWavDisplayTools" xmlns:local="clr-namespace:AldFirstNetworkTrainer" x:Class="AldFirstNetworkTrainer.MainWindow"
+        Title="First Step Training" Height="804" Width="1243" WindowStartupLocation="CenterScreen" WindowState="Maximized" Closing="Window_Closing">
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FF834200" Offset="0"/>
+			<GradientStop Color="#FF834200" Offset="1"/>
+			<GradientStop Color="#FF511B00" Offset="0.323"/>
+			<GradientStop Color="#FF511B00" Offset="0.694"/>
+		</LinearGradientBrush>
+	</Window.Background>
+	<Grid x:Name="mainGrid">
+		<TabControl  Style="{DynamicResource TabControlStyle1}">
+			<TabItem x:Name="tabTrainers" Header="Trainers Admin" Margin="0">
+				<Grid Background="White" Margin="0">
+					<local:UsrAdminTrainers x:Name="usrTrainerAdmins" Width="Auto" Height="Auto" Margin="0"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="tabMain" Header="Main" Height="30">
+				<Grid Background="#FFE5E5E5">
+					<Grid x:Name="layoutRoot">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="22"/>
+							<RowDefinition Height="113*"/>
+							<RowDefinition Height="27"/>
+							<RowDefinition Height="291"/>
+							<RowDefinition Height="19"/>
+							<RowDefinition Height="46.999"/>
+							<RowDefinition Height="218*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="82"/>
+							<ColumnDefinition Width="178*"/>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="287*"/>
+							<ColumnDefinition Width="204"/>
+							<ColumnDefinition Width="321"/>
+						</Grid.ColumnDefinitions>
+						<GridSplitter HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="1" Background="#FF005DFF" Grid.RowSpan="6"/>
+						<AldWavDisplayTools:AldCompleteDisplayer  x:Name="waveDisplayer" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+						<Label x:Name="lblSelect" Content="" Grid.Column="3" Grid.Row="4" Padding="0"/>
+						<AldWavDisplayTools:AldCompleteDisplayer x:Name="displayerB" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="3" Grid.RowSpan="2"/>
+						<AldWavDisplayTools:SpectogramAlpha x:Name="spectrogram1" Grid.ColumnSpan="3" Grid.Column="3" Grid.Row="3" Margin="0,0,1,0"/>
+						<ComboBox x:Name="cbInstrument" Grid.Column="5" Margin="0,0,1,0" SelectionChanged="cbInstrument_SelectionChanged"/>
+						<AldWavDisplayTools:SpectogramAlpha x:Name="spectrogram2" Grid.ColumnSpan="3" Grid.Column="3" Grid.Row="2" Visibility="Hidden"/>
+						<Menu x:Name="mainmenu"  IsMainMenu="False" Grid.ColumnSpan="5" Background="#BFFFFFFF" MouseEnter="Menu_MouseEnter">
+							<MenuItem x:Name="menuFile" Header="_File" MouseEnter="menuFile_MouseEnter">
+								<MenuItem x:Name="menuLastFolder" Header="_Load Last Folder" Click="menuLastFolder_Click"    />                
+								<MenuItem x:Name="menuLastFile" Header="_Load Last File" Click="menuLastFile_Click"    />
+								<MenuItem x:Name="menuChangeWorkingFolder" Header="_Change Working Folder" Click="menuChangeWorkingFolder_Click"  />
+								<MenuItem Header="_Exit"/>
+							</MenuItem>
+							<MenuItem Header="_Trainer Segment">
+                                <MenuItem x:Name="menuAdjustMarkers" Header="_Adjust Markers" Click="menuAdjustMarkers_Click" />
+                                <MenuItem x:Name="menuApplyMorlet" Header="_Apply Morlet" Click="menuApplyMorlet_Click"  />
+								<MenuItem x:Name="menuApplyHaar" Header="_Apply Haar" Click="menuApplyHaar_Click"  />
+								<MenuItem x:Name="menuApplyFilter" Header="_Apply Filters" Click="menuApplyFilter_Click" />
+								<!--<MenuItem x:Name="menuStartTraining" Header="_Start Training" Click="menuStartTraining_Click"/>-->
+								<MenuItem x:Name="menuTestSolution" Header="_Test Solution" Click="menuTestSolution_Click"  />
+								<MenuItem x:Name="menuApplyMarkers" Header="_Apply Markers" Click="menuApplyMarkers_Click"  />
+								<Separator/>
+
+							</MenuItem>
+							<MenuItem Header="_Trainer Frequencies">                
+								<MenuItem x:Name="menuSelPeaks" Header="_Sel Peaks" Click="menuSelPeaks_Click"    />
+								<MenuItem x:Name="menuApplySounds" Header="_Apply Sounds" Click="menuApplySounds_Click"   />
+								<Separator/>
+							</MenuItem>
+							<MenuItem Header="_Tools and Options">
+								<MenuItem x:Name="menuTunner" Header="_Tunner" Click="menuTunner_Click"   />
+								<Separator/>
+								<MenuItem x:Name="menuRecord" Header="_Record and Edit" Click="menuRecord_Click"   />
+								<Separator/>
+								<!--<MenuItem x:Name="menuSwapPlotter" Header="_Swap Plotter" Click="menuSwapPlotter_Click"    />-->
+							</MenuItem>
+							<MenuItem Header="_Manual Marking">
+								<MenuItem x:Name="menuStartMarker" Header="_Start Manual Marking" Click="menuStartMarker_Click"   />
+                                <MenuItem x:Name="menuSaveMarkersChanges" Header="_Save all changes" Click="menuSaveMarkersChanges_Click"    />
+							</MenuItem>
+                            <TextBox x:Name="txt1" Height="22" TextWrapping="Wrap" Width="400"/>
+
+                        </Menu>
+						<StackPanel x:Name="stackLegend" Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,1,0" Orientation="Horizontal"/>
+						<Grid x:Name="gridPlotter2" Grid.ColumnSpan="6" Margin="10,0,1,0" Grid.Row="1" Grid.RowSpan="6"/>
+						<StackPanel Grid.ColumnSpan="2" Grid.Row="1" Background="#FFD6D6D6" Grid.RowSpan="6">
+							<Expander x:Name="expanderFiles" Header="Files" Margin="0" Background="White">
+								<Grid Background="#FFE5E5E5">
+									<ListBox x:Name="listFiles" MouseDoubleClick="listFiles_MouseDoubleClick" SelectionChanged="listFiles_SelectionChanged" Background="White" FontSize="10.667" FontFamily="Consolas" Margin="0" Height="500" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+								</Grid>
+							</Expander>
+							<Expander Header="Console" Margin="0" Background="White" IsExpanded="True">
+								<Grid Background="#FFE5E5E5">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="1*"/>
+										<ColumnDefinition Width="1*"/>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="37*"/>
+										<RowDefinition Height="20"/>
+									</Grid.RowDefinitions>
+									<RichTextBox x:Name="txtConsole" Height="200" Margin="0"  FontFamily="Consolas" VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Grid.RowSpan="1" Grid.ColumnSpan="2">
+										<FlowDocument/>
+									</RichTextBox>
+									<Button x:Name="btnCopyLastRows" Content="Copy Last Rows" Grid.Row="1" Click="btnCopyLastRows_Click" Grid.Column="1"/>
+									<Button x:Name="btnClearAll" Content="Clear All" Grid.Row="1" Click="btnClearAll_Click"/>
+								</Grid>
+							</Expander>
+						</StackPanel>
+
+					</Grid>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="tabPlotter" Header="Plotter" Margin="0">
+				<Grid Background="White" Margin="0">
+					<WindowsFormsHost x:Name="plotterHost" Margin="0"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="tabTrainerStatus" Header="Trainer Status" Margin="0">
+				<Grid Background="White" Margin="0">
+					<local:UsrTrainersStatus x:Name="usrTrainerStatus" Height="Auto" Margin="0" Width="Auto"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="tabTrainerFrequenciesStatus" Header="Trainer Frequencies Status" Margin="0">
+				<Grid Background="White" Margin="0">
+					<local:UsrTrainerFrequenciesStatus x:Name="usrTrainerFrequenciesStatus" Margin="0"/>
+				</Grid>
+			</TabItem>
+			<TabItem x:Name="tabResults" Header="Results" Margin="0">
+				<Grid Background="White" Margin="0">
+					<local:UsrResults x:Name="usrTheResult" Loaded="usrTheResult_Loaded"/>
+					
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>

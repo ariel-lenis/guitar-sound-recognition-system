@@ -1,0 +1,204 @@
+﻿
+        /*
+        static MLApp.MLApp matlab = new MLApp.MLApp();
+        public static LPCResult LPCMatlabLibraries(float[] x, int order)
+        {
+            dynamic here;
+
+            double[] values = new double[100];
+            for (int i = 0; i < 100; i++)
+                values[i] = i;
+
+            matlab.Feval("lpc", 2, out here, values, (double)order);
+
+            double[,] data = here[0] as double[,];
+
+            float[] res = new float[order + 1];
+
+            for (int i = 0; i < data.GetLength(1); i++)
+                res[i] = (float)data[0, i];
+
+            return new LPCResult(res, (float)here[1]);
+        }
+        */
+
+        static double MatrixSolve(float[][] mat,int n)
+        {
+            double det = 1.0;      // determinant
+            double EPSILON = 1.0E-10;
+            // Gauss-Jordan elimination
+            for (int i = 1; i <= n; i++)
+            {   // for each row
+
+                // find pivot row from max column entry
+                double max = 0;      // maximum value in column
+                int pos = 1;         // position of pivot column
+                for (int j = i; j <= n; j++)
+                    if (Math.Abs(mat[j-1][i-1]) > max)
+                    {
+                        max = (float)Math.Abs(mat[j - 1][i - 1]);
+                        pos = j;
+                    }
+
+                // check for column of zeros
+                if (max < EPSILON) return (0.0);
+
+                // transpose current row with pivot row
+                //   and normalise diagonal element to unity
+                max = mat[pos - 1][i - 1];
+                for (int j = 1; j <= n + 1; j++)
+                {
+                    double temp = mat[pos - 1][j - 1];
+                    mat[pos - 1][j - 1] = mat[i - 1][j - 1];
+                    mat[i - 1][j - 1] = (float)(temp / max);
+                }
+
+                // keep record of determinant
+                if (i != pos)
+                    det = det * -max;
+                else
+                    det = det * max;
+
+                // reduce matrix by dividing through by row
+                for (int k = 1; k <= n; k++) if (k != i)
+                    {
+                        double val = mat[k - 1][i - 1];
+                        for (int j = i; j <= n + 1; j++)
+                            mat[k - 1][j - 1] = (float)(mat[k - 1][j - 1] - val * mat[i - 1][j - 1]);
+                    }
+            }
+
+            // return determinant
+            return det;
+        }
+        public static LPCResult LPCSolve(float[] x, int order)                    // returns 0=OK, 1=zero power, 2=fail
+        {
+            // compute autocorrelations
+            float []r = new float[order+1];
+            for (int i=0;i<=order;i++) {
+                    float sum = 0;
+                    for (int k=0;k<x.Length-i;k++)
+                            sum += x[k] * x[k+i];
+                    r[i] = sum;
+            } 
+            // build set of linear equations
+            float[][] mat = new float[order+1][];
+            for (int i = 0; i < order + 1; i++)
+                mat[i] = new float[order + 1];
+            for (int i = 1; i <= order; i++)
+                for (int j = 1; j <= order; j++)
+                    mat[i-1][j-1] = r[Math.Abs(i - j)];
+            for (int i=1;i<=order;i++)
+                    mat[i-1][order+1-1] = -r[i]; 
+
+            // solve them
+            if (MatrixSolve(mat, order) == 0)
+                throw new Exception("0");
+
+            float[] res = new float[order + 1];
+            res[0] = 1;
+
+            for (int i=1;i<=order;i++)
+                res[i] = mat[i-1][order+1-1];
+            return new LPCResult(res, 0);
+        }
+
+
+        public static LPCResult LPCAutocorrelation(float[] x,int order)
+        {
+            // compute autocorrelations
+           float[] r = new float[order + 1];  // temporary array
+           float pe;
+
+            for (int i=0;i<=order;i++) 
+            {
+                float sum = 0;
+                for (int k=0;k<x.Length-i;k++)
+                    sum += x[k] * x[k+i];
+                r[i] = sum;
+            }
+ 
+            // check power in signal
+            if (r[0] == 0) {
+                throw new Exception("0");
+            }
+ 
+            // compute predictor coefficients
+            float[] pc = new float[order + 1]; // temporary array
+            pe = r[0];           // initialise error to total power
+            pc[0] = 1.0f;         // first coefficient (b[0]) must = 1
+ 
+            // for each coefficient in turn
+            for (int k=1;k<=order;k++) 
+            { 
+                // find next coeff from pc[] and r[]
+                float sum = 0;
+                for (int i=1;i<=k;i++)
+                    sum -= pc[k-i] * r[i];
+                pc[k] = sum/pe;
+ 
+                // perform recursion on pc[]
+                for (int i=1;i<=k/2;i++) {
+                    float pci = pc[i] + pc[k] * pc[k - i];
+                    float pcki = pc[k - i] + pc[k] * pc[i];
+                    pc[i] = pci;
+                    pc[k-i] = pcki;
+                }
+ 
+                // calculate residual error
+                pe = pe * (1.0f - Math.Abs( pc[k]*pc[k]));
+                
+            }
+            return new LPCResult(pc, pe);
+        }
+
+        public static LPCResult LPC(float[] s, int p)
+        {
+            float[] R = new float[p+1];
+            for (int k = 0; k <= p; k++)
+                R[k] = CalculateR(s,k);
+
+            float E = R[0];
+            float[] alphas = new float[p+1];
+            float[] alphasAnt = new float[p + 1];
+
+            alphasAnt[0] = 1;
+
+            for (int i = 1; i <= p; i++)
+            {
+                for (int j = 1; j < p + 1; j++)
+                    alphas[j] = 0;
+                alphas[0] = 1;
+
+                float k = R[i];
+
+                for (int j = 1; j < i; j++)
+                {
+                    k += alphasAnt[j] * R[i - j];//4-1,4-2,4-3=3,2,1
+                    //if(i==4)
+                    //    Console.WriteLine("A:{0} B:{1}", alphasAnt[j],R[i-j]);
+                }
+                
+
+                k = -k/E;
+                alphas[i] = k;
+                for (int j = 1; j < i; j++)
+                {
+                    alphas[j] = alphasAnt[j] + k * alphasAnt[i - j];
+                    /*
+                    if (i == 5)
+                        Console.WriteLine("A:{0} B:{1}", alphasAnt[j], alphasAnt[i - j]);*/
+                }
+                E = (1 - Math.Abs(k * k)) * E;
+
+                for (int j = 0; j < p + 1; j++)
+                {
+                    //if(i==3)
+                    //    Console.Write(alphas[j] + " ");                    
+                    alphasAnt[j] = alphas[j];
+                }
+               // Console.WriteLine();
+            }
+            return new LPCResult(alphas,(float)Math.Sqrt(E));
+            //return new LPCResult(alphas, E);
+        }

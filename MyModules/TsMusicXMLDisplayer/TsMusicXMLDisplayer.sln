@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsMusicXMLDisplayer", "TsMusicXMLDisplayer\TsMusicXMLDisplayer.csproj", "{3605F1C2-52C3-42C3-8CF2-DE308F799466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{27883198-38DE-48FC-A195-D96D76904277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsExtraControls", "..\TsExtraControls\TsExtraControls.csproj", "{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldWavDisplayTools", "..\AldWavDisplayTools\AldWavDisplayTools.csproj", "{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsPentagramEngine", "..\TsPentagramTools\TsPentagramEngine\TsPentagramEngine.csproj", "{D8D89832-EEF5-47A4-B862-A7BFA919662F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27883198-38DE-48FC-A195-D96D76904277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27883198-38DE-48FC-A195-D96D76904277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27883198-38DE-48FC-A195-D96D76904277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27883198-38DE-48FC-A195-D96D76904277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

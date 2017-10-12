@@ -1,0 +1,11 @@
+LIBRARY TsCuda.dll
+EXPORTS
+	FFT
+	MultipleFFT
+	Test
+	HostCloneWaveToDevice
+	Spectrogram
+	HostFastFourierTransform
+	HostPlanScalogram
+	HostIterateWindow
+	HostDestroyScalogram

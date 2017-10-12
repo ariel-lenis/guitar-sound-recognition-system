@@ -1,0 +1,11 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:TsMusicXMLDisplayer="clr-namespace:TsMusicXMLDisplayer;assembly=TsMusicXMLDisplayer" x:Class="Tester.WindowPaper"
+        Title="WindowPaper" Height="694.853" Width="739.147" WindowStartupLocation="CenterScreen" Background="#FFCBCBCB" WindowState="Maximized">
+    <Grid>
+
+        <TsMusicXMLDisplayer:DisplayerTheDocument x:Name="usrDisplayerPaper" Margin="0" Width="Auto" Height="Auto"/>
+
+    </Grid>
+</Window>

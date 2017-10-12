@@ -1,0 +1,211 @@
+﻿        private void LoadNetworks(bool newone)
+        {
+            //if (File.Exists(LastNetworkPath("trainer.netAll")) && MessageBox.Show("Do you want to load the last saved networks???", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if(!newone)
+                ;//trainerAll.Networks = RawData.ReadObject<Dictionary<string, Networks.IGeneralizedNetwork>>(LastNetworkPath("trainer.netAll"));
+            else
+            {
+                /*
+                AldNetwork ax = new AldNetwork(new int[] { 256, 64, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.05f, 0.05f);
+
+                trainerAll.SetNetwork("spec 64in", new AldNetwork(new int[] { 64, 64, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.025f, 0.05f));
+                trainerAll.SetNetwork("spec 128in", new AldNetwork(new int[] { 128, 64, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.025f, 0.05f));
+                trainerAll.SetNetwork("spec 256in", new AldNetwork(new int[] { 256, 64, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.025f, 0.05f));
+                */
+                
+                //AldNetwork network2 = new AldNetwork(new int[] { 128, 64,32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.025f, 0.05f);
+                //trainerAll.SetNetwork("amd", network2);
+                //trainerAll.SetNetwork("ste", network2.GetCopy);
+
+                ///
+                ///Networks.IGeneralizedNetwork lpcstenetwork = new Networks.TsFastNetwork();
+                ///lpcstenetwork.Create(new int[] { 256,256, 64, 32, 1 }, 0.025f, 0.05f);
+                ///this.thesolution.TrainerTimes.SetNetwork("lpcste", lpcstenetwork);
+                
+                
+                //trainerAll.SetNetwork("lpcamd", network2.GetCopy);
+
+                //AldNetwork ax = new AldNetwork(new int[] { 256, 64, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.05f, 0.05f);
+                //AldNetwork ax = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.05f, 0.05f);
+
+                /*
+                AldNetwork ax = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.05f, 0.05f);
+                AldNetwork bx = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.05f, 0.05f);
+                
+                //great
+                AldNetwork cx = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.01f, 0.05f);
+                AldNetwork dx = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.01f, 0.01f);
+                AldNetwork ex = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.2f, 0.05f);
+                AldNetwork fx = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.3f, 0.05f);
+                AldNetwork gx = new AldNetwork(new int[] { 512, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 2f, 0.05f);
+                */
+
+                Networks.IGeneralizedNetwork ax = new Networks.TsCudaNetwork();
+                Networks.IGeneralizedNetwork bx = new Networks.TsCudaNetwork();
+                //ax.Create(new int[] { 1024, 512, 64, 1 }, 0.05f, 0.05f);
+
+                //ax.Create(new int[] { 1024*2, 1024, 64, 1 }, 0.05f, 0.05f);
+
+                ax.Create(new int[] { 1024 * 2, 1024,256, 64, 1 }, 0.05f, 0.01f);
+                bx.Create(new int[] { 1024 * 2, 1024, 256, 64, 1 }, 0.05f, 0.1f);
+
+
+                //Networks.IGeneralizedNetwork bx = new Networks.TsFastNetwork();
+                //bx.Create(new int[] { 2048, 1024, 64, 1 }, 0.05f, 0.05f);
+
+
+                //AldNetwork bx = new AldNetwork(new int[] { 1024, 128, 32, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.1f, 0.05f,divisions:4);
+
+                ///this.thesolution.TrainerTimes.SetNetwork("spec cuda", ax);
+                ///this.thesolution.TrainerTimes.SetNetwork("spec cuda 2", bx);
+                //trainerAll.SetNetwork("spec fast", bx);
+
+                /*
+                trainerAll.SetNetwork("spec 2.25b", bx);
+                trainerAll.SetNetwork("spec 2.25c", cx);
+                trainerAll.SetNetwork("spec 2.25d", dx);
+                trainerAll.SetNetwork("spec 2.25e", ex);
+                trainerAll.SetNetwork("spec 2.25f", fx);
+                trainerAll.SetNetwork("spec 2.25g", gx);
+                */
+                //trainerAll.SetNetwork("spec 2.5", ax.GetCopy);
+                //trainerAll.SetNetwork("spec 2.75", ax.GetCopy);
+
+                //trainerAll.SetNetwork("spec 2.5div", ax);                
+                
+            }
+
+            //usrNeuralNetworksControl.LoadNetworks(trainerAll);
+
+            //if (trainerFrequencies == null)
+            //if(newone)
+            //{
+                ///var network = LoadNetworks2(newone);
+                ///this.thesolution.TrainerFrequencies = new TsAdminAllFrequencies();
+                ///this.thesolution.TrainerFrequencies.TheNetwork = network;
+            //}
+        }
+
+
+
+        private Networks.IGeneralizedNetwork LoadNetworks2(bool newone)
+        {
+            //if (File.Exists(LastNetworkPath("Network.netFreq")) && MessageBox.Show("Do you want to load the last saved frequency networks???", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (!newone)
+                return RawData.ReadObject<Networks.IGeneralizedNetwork>(LastNetworkPath("Network.netFreq"));
+            else
+            {
+                Networks.IGeneralizedNetwork network = new Networks.TsFastNetwork();
+                network.Create(new int[] { 50, 100, 20, 1 }, 0.02f, 0.05f);
+
+                return network;
+
+                //return new AldNetwork(new int[] { 50, 100, 20, 1 }, AldActivationFunctions.Sigmoidal, AldActivationFunctions.dSigmoidal, 0.02f, 0.05f);
+            }
+        }
+
+
+        private void menuApplyFilter_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentTrainingSet == null)
+            {
+                MessageBox.Show("No training set loaded.");
+                return;
+            }
+            if (currentTrainingSet.Wave == null)
+            {
+                MessageBox.Show("No wave selected.");
+                return;
+            }
+
+            if (this.thesolution.TrainerTimes.NetworksCount == 0)
+            {
+                MessageBox.Show("No networks loaded!!!");
+                return;
+            }
+
+            int windowsLength = 1001;
+            float windowsAmp = 1.0f / windowsLength;
+
+            var wave = currentTrainingSet.Wave;
+
+            
+            var amdwave = TsFFTFramework.AldCudaAlgorithms.AverageTransform(wave, windowsAmp, windowsLength);
+            amdwave.AldFitPositiveLimitMax();
+            amdwave.Log10Normalization();
+            waveDisplayer.AddSamples(amdwave, 0, TsColors.CommonColors[0]);
+            /*
+
+            amdwave = TsFFTFramework.AldCudaAlgorithms.AverageTransform(wave, windowsAmp, windowsLength/2);
+            amdwave.AldFitPositiveLimitMax();
+            amdwave.Log10Normalization();
+            waveDisplayer.AddSamples(amdwave, 0, TsColors.CommonColors[1]);
+
+            amdwave = TsFFTFramework.AldCudaAlgorithms.AverageTransform(wave, windowsAmp, windowsLength / 4);
+            //amdwave = amdwave.AdaptVector(amdwave.Length / 2048);
+            amdwave.AldFitPositiveLimitMax();
+            amdwave.Log10Normalization();
+            waveDisplayer.AddSamples(amdwave, 0, TsColors.CommonColors[2]);
+            */
+            
+            var stewave = TsFFTFramework.AldCudaAlgorithms.ShortTimeEnergy(wave, windowsAmp, windowsLength);
+            stewave.AldFitPositiveLimitMax();
+            stewave.Log10Normalization();
+            waveDisplayer.AddSamples(stewave, 0, TsColors.CommonColors[1]);
+            
+            var lpc = AldLPCTransform.LPCTransform(wave, currentTrainingSet.WaveDescriptor.SampleRate, 0.03f, 12);
+            
+            var lpcamd = TsFFTFramework.AldCudaAlgorithms.AverageTransform(lpc, windowsAmp, windowsLength);
+            lpcamd.AldFitPositiveLimitMax();
+            lpcamd.Log10Normalization();
+            waveDisplayer.AddSamples(lpcamd, 0, TsColors.CommonColors[2]);
+           
+            var lpcste = TsFFTFramework.AldCudaAlgorithms.ShortTimeEnergy(lpc, windowsAmp, windowsLength);
+            lpcste.AldFitPositiveLimitMax();
+            lpcste.Log10Normalization();
+            waveDisplayer.AddSamples(lpcste, 0, TsColors.CommonColors[3]);
+
+            
+            /*
+            var zcrwave = AldCUDA.AldCudaAlgorithms.ZeroCrossingRate(wave, windowsAmp, windowsLength);
+            zcrwave.AldFitPositiveLimitMax();
+            waveDisplayer.AddSamples(zcrwave, 0, TsColors.CommonColors[4]);             
+            */
+
+            double resumerate = (double)currentTrainingSet.WaveDescriptor.Samples[0].Length / spdata[0].Length;
+
+            this.thesolution.TrainerTimes.SetData1d("amd", amdwave);
+            this.thesolution.TrainerTimes.SetData1d("ste", stewave);
+
+            this.thesolution.TrainerTimes.SetData1d("lpcamd", lpcamd);
+            this.thesolution.TrainerTimes.SetData1d("lpcste", lpcste);
+
+            this.thesolution.TrainerTimes.SetData2d("spec cuda", spdata, 8, resumerate, 0f, negativenormalization: false);
+
+            //trainerAll.SetData2d("spec cuda 2", spdata, 8, resumerate, 0f, negativenormalization: false);
+
+            //trainerAll.SetData2d("spec fast", spdata, 8, resumerate, 0f, negativenormalization: true);
+
+            /*
+            trainerAll.SetData2d("spec 2.25b", spdata, 8, resumerate, 0f, negativenormalization: true);
+            trainerAll.SetData2d("spec 2.25c", spdata, 8, resumerate, 0f, negativenormalization: true);
+            trainerAll.SetData2d("spec 2.25d", spdata, 8, resumerate, 0f, negativenormalization: true);
+            trainerAll.SetData2d("spec 2.25e", spdata, 8, resumerate, 0f, negativenormalization: true);
+            trainerAll.SetData2d("spec 2.25f", spdata, 8, resumerate, 0f, negativenormalization: true);
+            trainerAll.SetData2d("spec 2.25g", spdata, 8, resumerate, 0f, negativenormalization: true);
+            */
+            //trainerAll.SetData2d("spec 2.5", spdata, 8, resumerate, 0.25f, negativenormalization: true);
+            //trainerAll.SetData2d("spec 2.75", spdata, 8, resumerate, 0.33f, negativenormalization: true);
+
+            stackLegend.Children.Clear();
+
+            for (int i = 0; i < this.thesolution.TrainerTimes.Trainers.Count; i++)
+            {
+                stackLegend.Children.Add(new Label() { Content = this.thesolution.TrainerTimes.Trainers.ElementAt(i).Key, Foreground = new SolidColorBrush(TsColors.CommonColors[i]), Background = Brushes.White, Padding = new Thickness(1) });
+            }
+
+
+            //trainerAll.SetData2d("spec 2.5div", spdata, 8, resumerate, 0.5f, negativenormalization: true);
+
+            waveDisplayer.RenderAll();
+        }

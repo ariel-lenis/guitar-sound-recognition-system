@@ -1,0 +1,47 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="AldFirstNetworkTrainer.UsrStringTunning"
+	x:Name="UserControl" Height="56" Width="708" BorderBrush="#FF5F2700" BorderThickness="0,2.5">
+	<UserControl.Resources>
+		<LinearGradientBrush x:Key="Madera" EndPoint="-0.004,0.915" MappingMode="RelativeToBoundingBox" StartPoint="-0.001,0.003">
+			<GradientStop Color="#FF914200" Offset="0"/>
+			<GradientStop Color="#FF914200" Offset="1"/>
+			<GradientStop Color="#FFBB5D0E" Offset="0.509"/>
+		</LinearGradientBrush>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot" Background="{DynamicResource Madera}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="7"/>
+			<RowDefinition/>
+			<RowDefinition Height="7"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="7"/>
+			<ColumnDefinition Width="156.5"/>
+			<ColumnDefinition Width="22"/>
+			<ColumnDefinition Width="103"/>
+			<ColumnDefinition Width="20"/>
+			<ColumnDefinition Width="205.5"/>
+			<ColumnDefinition Width="15"/>
+			<ColumnDefinition Width="168"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Viewbox Grid.Column="1" Grid.Row="1" Stretch="Fill">
+			<TextBlock x:Name="txtInformation" TextWrapping="Wrap" Text="TextBlock" Background="{Binding Background, ElementName=UserControl}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+		</Viewbox>
+		<Viewbox Grid.Column="3" Grid.Row="1" Stretch="Fill">
+			<TextBlock x:Name="txtDistance" TextWrapping="Wrap" Text=" " Background="#7F000000" Foreground="White"/>
+		</Viewbox>
+		<Viewbox Grid.Column="5" Grid.Row="1" Stretch="Fill">
+			<TextBlock x:Name="txtFrequency" TextWrapping="Wrap" Text=" " Background="#7F000000" Foreground="White"/>
+		</Viewbox>
+		<Viewbox Grid.Column="7" Stretch="Fill" Grid.Row="1">
+			<TextBlock x:Name="txtCents" TextWrapping="Wrap" Text=" " Background="#7F000000" Foreground="White"/>
+		</Viewbox>
+	</Grid>
+</UserControl>

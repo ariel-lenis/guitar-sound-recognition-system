@@ -1,0 +1,25 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:AldExtraControls="clr-namespace:TsExtraControls;assembly=TsExtraControls" x:Class="AldFirstNetworkTrainer.WPFTrainer2"
+        Title="WPFTrainer2" Height="406" Width="659" Closing="Window_Closing" WindowState="Maximized">
+    <Grid>
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="178"/>
+    		<ColumnDefinition/>
+    	</Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49"/>
+            <RowDefinition Height="163*"/>
+            <RowDefinition Height="141*"/>
+            <RowDefinition Height="22"/>
+        </Grid.RowDefinitions>
+
+        <AldExtraControls:UsrAldPlotterPoints x:Name="plotter" Grid.Row="1" Grid.Column="1"/>
+        <Button x:Name="btnStartTraining" Content="Start Training" HorizontalAlignment="Left" Width="92" Click="btnStartTraining_Click" Grid.Column="1"/>
+        <ListBox x:Name="listRanges" Grid.RowSpan="4" Background="#FFEAEAEA" MouseDoubleClick="listRanges_MouseDoubleClick"/>
+        <AldExtraControls:UsrAldPlotterPoints x:Name="plotterWave" Grid.Row="2" Grid.Column="1"/>
+        <Slider x:Name="sliderWave" Grid.Column="1" Grid.Row="3" ValueChanged="sliderWave_ValueChanged"/>
+
+    </Grid>
+</Window>

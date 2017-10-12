@@ -1,0 +1,385 @@
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+#include <stdio.h>
+#include <cublas_v2.h>
+#define MAX_THREADS_PER_BLOCK 512
+
+struct NetworkData
+{
+	int layers;
+	int totalw;
+	int totaln;
+	int* sizesN;
+	int* sizesW;
+
+	float** weights;
+	float** lastInputSums;
+	float** lastdActivationOutputs;
+	float** lastActivationOutputs;
+	float** bias;
+	float** lastLocalGradients;
+
+	float* errors;
+	float* expectedbuffer;
+
+	NetworkData* ptr;
+};
+
+struct Network
+{
+	NetworkData* host;
+	NetworkData* device;
+};
+
+cudaError_t startNetwork(int* neuronsPerLayer,int n,Network* &thenetwork);
+cudaError_t disposeNetwork(Network* thenetwork);
+cudaError_t cudaForward(Network* thenetwork,cublasHandle_t cublasHandle,float* inputs,float alpha,float* result);
+
+
+int main()
+{
+    int layers = 5;
+	int* layerssize = new int[5];
+	layerssize[0]=10;
+	layerssize[1]=5;
+	layerssize[2]=30;
+	layerssize[3]=20;
+	layerssize[4]=10;
+
+
+    // Add vectors in parallel.
+	Network* thenetwork;
+	cudaError_t cudaStatus = startNetwork(layerssize,layers,thenetwork);
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "addWithCuda failed!");
+        return 1;
+    }
+	cublasHandle_t handle;
+	cublasCreate(&handle);
+
+	float* inputs = new float[10];
+	float* results = new float[10];
+	for(int i=0;i<10;i++)
+		inputs[i]=i/100.0;
+
+	cudaForward(thenetwork,handle,inputs,0.05,results);
+
+	for(int i=0;i<10;i++)
+	{
+		printf("%d:%f\n",i,results[i]);
+	}
+
+	disposeNetwork(thenetwork);
+
+    // cudaDeviceReset must be called before exiting in order for profiling and
+    // tracing tools such as Nsight and Visual Profiler to show complete traces.
+    cudaStatus = cudaDeviceReset();
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaDeviceReset failed!");
+        return 1;
+    }
+	printf("OK\n");
+    return 0;
+}
+
+
+void blocksAndThreads(int n,int maxthreads,int &blocks,int &threads)
+{	
+	blocks = (n+MAX_THREADS_PER_BLOCK-1)/MAX_THREADS_PER_BLOCK;
+	threads= (n<MAX_THREADS_PER_BLOCK)?n:MAX_THREADS_PER_BLOCK;
+}
+
+void gpu_blas_mmul(cublasHandle_t handle, const float *A, const float *B, float *C, unsigned int m, unsigned int k, unsigned int n) 
+{
+    int lda=m,ldb=k,ldc=m;
+    const float alf = 1;const float bet = 0;
+    const float *alpha = &alf;const float *beta = &bet;
+    cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
+
+}
+
+__device__ float dSigmoidalActivation(float x,float alpha)
+{
+	float res = (float)(exp(-alpha * x) / pow(1 + exp(-alpha * x), 2));
+	return res;
+}
+__device__ float sigmoidalActivation(float x,float alpha)
+{
+	float expp = exp(-alpha * x);	
+	float res =  (float)((1.0 / (1 + expp)));
+	return res;
+}
+
+__global__ void cudaActivateFunctions(void* ptrnetwork,int layer,float alpha,bool calculateerror)
+{
+	unsigned int idx = blockDim.x*blockIdx.x+threadIdx.x;
+	NetworkData* network=(NetworkData*)ptrnetwork;
+	if(idx>=network->sizesN[layer]) return;
+
+	float bias = network->bias[layer][idx];
+	float sum = network->lastInputSums[layer][idx]+bias;	
+	network->lastActivationOutputs[layer][idx]=sigmoidalActivation(sum,alpha);	
+	network->lastdActivationOutputs[layer][idx]=dSigmoidalActivation(sum,alpha);	
+
+	if(calculateerror)
+		network->errors[idx]=network->expectedbuffer[idx]-network->lastActivationOutputs[layer][idx];
+}
+cudaError_t cudaStartVector(float** &pdevice,float** &phost,int* sizes,int nsizes,int sumsizes)
+{
+	cudaError_t cudaStatus;
+	float* start=0;
+	cudaStatus = cudaMalloc((void**)&start,sumsizes * sizeof(float));
+	cudaStatus = cudaMalloc((void**)&pdevice,nsizes * sizeof(float*));
+	phost=new float*[nsizes];
+	int idx=0;
+	for(int i=0;i<nsizes;i++)
+	{
+		phost[i]=&start[idx];
+		idx+=sizes[i];
+	}
+	cudaStatus = cudaMemcpy(pdevice, phost,nsizes*sizeof(float*), cudaMemcpyHostToDevice);
+}
+cudaError_t cudaForward(Network* thenetwork,cublasHandle_t cublasHandle,float* inputs,float alpha,float* result,float* expectedoutputs)
+{
+	cudaError_t cudaStatus;
+	NetworkData* device = thenetwork->device;
+	NetworkData* host = thenetwork->host;
+
+	cudaStatus = cudaMemcpy(host->lastActivationOutputs[0], inputs,host->sizesN[0]*sizeof(float), cudaMemcpyHostToDevice);
+	if(expectedoutputs!=NULL)
+		cudaStatus = cudaMemcpy(host->expectedbuffer, expectedoutputs,host->sizesN[host->layers-1]*sizeof(float), cudaMemcpyHostToDevice);
+	int blocks,threads;
+
+	for(int i=0;i<host->layers-1;i++)
+	{
+		gpu_blas_mmul(	cublasHandle,//cublas handle
+						host->lastActivationOutputs[i],//A
+						host->weights[i],//B
+						host->lastInputSums[i+1],//C
+						1,//rows A
+						host->sizesN[i],//cols A
+						host->sizesN[i+1]);//cols B
+
+		blocksAndThreads(host->sizesN[i+1],MAX_THREADS_PER_BLOCK,blocks,threads);
+		cudaActivateFunctions<<<blocks,threads>>>(device->ptr,i+1,alpha, (expectedoutputs!=NULL && (i+1)==(host->layers-1)) );
+	}
+	if(result!=NULL)
+		cudaStatus = cudaMemcpy(result,host->lastActivationOutputs[host->layers-1], host->sizesN[host->layers-1]*sizeof(float), cudaMemcpyDeviceToHost);
+
+	return cudaStatus;
+}
+
+cudaError_t cudaGetTotalError(Network* thenetwork,float* outputs,float &error)
+{
+	int oidx=thenetwork->host->layers-1;
+	int on=thenetwork->host->sizesN[oidx];
+	float* lao = new float[on];
+	cudaMemcpy(lao,thenetwork->host->lastActivationOutputs[oidx],on*sizeof(float),cudaMemcpyKind::cudaMemcpyDeviceToHost);
+	error=0;
+	for(int i=0;i<on;i++)
+	{
+		
+	}
+	delete[] lao;
+}
+cudaError_t cudaTrain(Network* thenetwork,cublasHandle_t cublasHandle,float* inputs,float alpha,float* outputs)
+{
+	cudaForward(thenetwork,cublasHandle,inputs,alpha,NULL,outputs);
+	cudaErrorGradientLocal(thenetwork,cublasHandle,inputs,alpha,outputs);
+}
+
+
+
+__global__ void cudaStartNetwork(void* ptrnetwork)
+{
+	int idx = blockDim.x*blockIdx.x+threadIdx.x;
+
+	NetworkData* thenetwork = (NetworkData*)ptrnetwork;
+	int start=0;
+	int startpos=0;
+
+	if(idx<thenetwork->totaln)
+	{
+		start=0;
+		startpos=0;
+		for(int i=0;i<thenetwork->layers;i++)
+		{
+			int nextsize=thenetwork->sizesN[i];
+			if(start+nextsize>idx) break;
+			start+=nextsize;
+			startpos++;
+		}		
+		thenetwork->lastInputSums[startpos][idx-start]=0;
+		thenetwork->lastActivationOutputs[startpos][idx-start]=0;
+		thenetwork->bias[startpos][idx-start]=0.5;
+		thenetwork->lastLocalGradients[startpos][idx-start]=0;
+		if(idx<thenetwork->sizesN[thenetwork->layers-1])
+			thenetwork->errors[idx]=0;
+	}
+	
+	if(idx<thenetwork->totalw)
+	{
+		start=0;
+		startpos=0;
+		for(int i=0;i<thenetwork->layers-1;i++)
+		{
+			int nextsize=thenetwork->sizesW[i];
+			if(start+nextsize>idx) break;
+			start+=nextsize;
+			startpos++;
+		}		
+		thenetwork->weights[startpos][idx-start]=0.5;
+	}
+	
+}
+cudaError_t startNetwork(int* neuronsPerLayer,int n,Network* &thenetwork)
+{
+	thenetwork = new Network();
+	NetworkData* device= new NetworkData();
+	NetworkData* host=new NetworkData();
+	
+	thenetwork->device=device;
+	thenetwork->host=host;
+
+	host->ptr=host;
+
+	//host->weights=new float*[n-1];
+	//host->lastInputSums=new float*[n];
+	//host->lastActivationOutputs=new float*[n];
+	//host->lastdActivationOutputs=new float*[n];
+	//host->bias=new float*[n];
+	//host->lastLocalGradients=new float*[n];
+
+	host->sizesW=new int[n-1];
+	host->sizesN=new int[n];	
+
+	int* ptrsizesw;
+	int total=0;
+	int totalw=0;
+	int delta;
+	int blocks;
+	int threads;
+	cudaError_t cudaStatus;
+	cudaStatus = cudaSetDevice(0);
+
+	for(int i=0;i<n;i++)
+	{
+		if(i<n-1)
+		{
+			delta= neuronsPerLayer[i]*neuronsPerLayer[i+1];
+			host->sizesW[i]=delta;
+			cudaStatus = cudaMalloc((void**)&host->weights[i],delta * sizeof(float));
+			totalw+=delta;
+		}
+		cudaStatus = cudaMalloc((void**)&host->lastInputSums[i],neuronsPerLayer[i] * sizeof(float));
+		cudaStatus = cudaMalloc((void**)&host->lastActivationOutputs[i],neuronsPerLayer[i] * sizeof(float));
+		cudaStatus = cudaMalloc((void**)&host->lastdActivationOutputs[i],neuronsPerLayer[i] * sizeof(float));
+		cudaStatus = cudaMalloc((void**)&host->bias[i],neuronsPerLayer[i] * sizeof(float));
+		cudaStatus = cudaMalloc((void**)&host->lastLocalGradients[i],neuronsPerLayer[i] * sizeof(float));
+		total+=neuronsPerLayer[i];
+		host->sizesN[i]=neuronsPerLayer[i];
+	}
+
+	cudaStatus = cudaMalloc((void**)&device->weights, (n-1) * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->lastInputSums, n * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->lastActivationOutputs, n * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->lastdActivationOutputs, n * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->bias, n * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->lastLocalGradients, n * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->sizesN, n * sizeof(float));
+	cudaStatus = cudaMalloc((void**)&device->sizesW, n * sizeof(float));
+	cudaStatus = cudaMalloc((void**)&device->ptr, sizeof(NetworkData));
+	cudaStatus = cudaMalloc((void**)&device->errors, neuronsPerLayer[n-1] * sizeof(float*));
+	cudaStatus = cudaMalloc((void**)&device->expectedbuffer, neuronsPerLayer[n-1] * sizeof(float*));
+
+	host->layers=device->layers=n;
+	host->totalw=device->totalw=totalw;
+	host->totaln=device->totaln=total;
+
+	cudaStatus = cudaMemcpy(device->weights, host->weights, (n-1) * sizeof(float*), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device->sizesN, host->sizesN, n * sizeof(int), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device->sizesW, host->sizesW,(n-1) * sizeof(int), cudaMemcpyHostToDevice);
+
+	cudaStatus = cudaMemcpy(device->lastInputSums,host->lastInputSums,n*sizeof(float*), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device->lastActivationOutputs,host->lastActivationOutputs,n * sizeof(float*), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device->lastdActivationOutputs,host->lastdActivationOutputs,n * sizeof(float*), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device->bias,host->bias,n * sizeof(float*), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device->lastLocalGradients,host->lastLocalGradients,n * sizeof(float*), cudaMemcpyHostToDevice);
+
+	cudaStatus = cudaMemcpy(device->ptr, device,sizeof(NetworkData), cudaMemcpyHostToDevice);
+	
+	int max = totalw;
+	if(max<total) max=total;
+
+	blocksAndThreads(max,MAX_THREADS_PER_BLOCK,blocks,threads);
+	cudaStartNetwork<<<blocks, threads>>>(device->ptr);
+	
+	/*
+	for(int i=0;i<host->layers-1;i++)
+	{
+		float* tw = new float[host->sizesW[i]];
+		cudaStatus = cudaMemcpy(tw,host->weights[i], host->sizesW[i]*sizeof(float),cudaMemcpyDeviceToHost);
+		for(int j=0;j<host->sizesW[i];j++)
+		{
+			printf("%f\t",tw[j]);
+		}
+		delete[] tw;
+		printf("\n");
+	}
+	*/
+	/*
+	for(int i=0;i<host->layers;i++)
+	{
+		float* tw = new float[host->sizesN[i]];
+		cudaStatus = cudaMemcpy(tw,host->lastActivationOutputs[i], host->sizesN[i]*sizeof(float),cudaMemcpyDeviceToHost);
+		for(int j=0;j<host->sizesN[i];j++)
+		{
+			printf("%f\t",tw[j]);
+		}
+		delete[] tw;
+		printf("\n");
+	}
+	*/
+	cudaStatus = cudaGetLastError();
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "addKernel launch failed: %s\n", cudaGetErrorString(cudaStatus));        
+    }
+    cudaStatus = cudaDeviceSynchronize();
+    if (cudaStatus != cudaSuccess) {
+        fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatus);
+    }
+
+
+	//delete[] pptrweights;
+	//delete[] sizesw;
+
+	return cudaError_t::cudaSuccess;
+}
+
+cudaError_t disposeNetwork(Network* network)
+{
+	cudaFree(network->device->sizesN);
+	cudaFree(network->device->sizesW);
+
+	for(int i=0;i<network->host->layers-1;i++)
+		cudaFree(network->host->weights[i]);
+	cudaFree(network->device->weights);
+	for(int i=0;i<network->host->layers;i++)
+	{
+		cudaFree(network->host->lastInputSums[i]);
+		cudaFree(network->host->lastActivationOutputs[i]);
+		cudaFree(network->host->bias[i]);
+		cudaFree(network->host->lastLocalGradients[i]);
+		cudaFree(network->host->lastdActivationOutputs[i]);
+	}
+	cudaFree(network->device->lastInputSums);
+	cudaFree(network->device->lastActivationOutputs);
+	cudaFree(network->device->lastdActivationOutputs);
+	cudaFree(network->device->bias);
+	cudaFree(network->device->lastLocalGradients);
+	cudaFree(network->device->errors);
+	cudaFree(network->device->expectedbuffer);
+	cudaFree(network->device->ptr);
+	
+	return cudaError_t::cudaSuccess;
+}

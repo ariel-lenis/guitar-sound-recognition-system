@@ -1,0 +1,9 @@
+﻿<Window x:Class="AldFirstNetworkTrainer.WPFTrainerMusic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPFTrainerMusic" Height="354" Width="491">
+    <Grid>
+    	<Canvas x:Name="canvasAll"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,15 @@
+LIBRARY TsCudaANNDll
+
+EXPORTS
+
+cudaANNCreateNetwork
+
+cudaANNTrain
+
+cudaANNForward
+
+cudaANNFree
+
+cudaANNBackup
+
+cudaANNRestore

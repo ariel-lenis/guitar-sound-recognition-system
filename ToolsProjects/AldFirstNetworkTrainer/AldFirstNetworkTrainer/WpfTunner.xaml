@@ -1,0 +1,25 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:AldExtraControls="clr-namespace:TsExtraControls;assembly=TsExtraControls"
+	xmlns:local="clr-namespace:AldFirstNetworkTrainer"
+	x:Class="AldFirstNetworkTrainer.WpfTunner"
+	x:Name="Window"
+	Title="Tesis Tunner"
+	Width="715.18" Height="581" Background="#FF8F5400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="63"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+        
+		<AldExtraControls:UsrAldPlotterPoints x:Name="spectrumplot" Margin="0,329,0,0" Background="White" Grid.Row="1"/>
+		<local:UsrStringTunning x:Name="tunnerstring1" Height="64" VerticalAlignment="Top" Width="Auto" Grid.RowSpan="2" Background="#7F0051FF"/>
+		<local:UsrStringTunning x:Name="tunnerstring2" Height="64" VerticalAlignment="Top" Width="Auto" Grid.Row="1" BorderBrush="#FF002B5F" Background="#7F00FF0C"/>
+		<local:UsrStringTunning x:Name="tunnerstring3" Height="64" VerticalAlignment="Top" Width="Auto" Grid.Row="1" Margin="0,64,0,0" Background="#7FFF0000"/>
+		<local:UsrStringTunning x:Name="tunnerstring4" Height="64" VerticalAlignment="Top" Width="Auto" Grid.Row="1" Margin="0,128,0,0" Background="#7FC500FF"/>
+		<local:UsrStringTunning x:Name="tunnerstring5" Height="64" VerticalAlignment="Top" Width="Auto" Grid.Row="1" Margin="0,192,0,0" Background="#7F00B9FF"/>
+		<local:UsrStringTunning x:Name="tunnerstring6" Height="64" VerticalAlignment="Top" Width="Auto" Grid.Row="1" Margin="0,256,0,0" Background="#7FFFF300"/>
+	</Grid>
+</Window>

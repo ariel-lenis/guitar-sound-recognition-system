@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="TsMusicXMLDisplayer.DisplayerTheDocument"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="864" Width="1444" Background="#FFFFE2E2">
+    <Grid SizeChanged="Grid_SizeChanged">
+    	<Grid.Background>
+		<ImageBrush ImageSource="2014-11-16_22-28-26.png" 
+            
+            Stretch="None"
+            AlignmentY="Top"
+            Viewport="0,0,16,16"
+            ViewportUnits="Absolute" TileMode="Tile" />    		
+    		<!--
+			<VisualBrush Viewport="0,0,0.1,0.1" TileMode="Tile" Stretch="Uniform">
+				<VisualBrush.Visual>
+					<Image Source="2014-11-16_22-28-26.png"></Image>
+				</VisualBrush.Visual>    
+			</VisualBrush>		
+			-->
+			<!--
+    		<ImageBrush ImageSource="2014-11-16_22-28-26.png" TileMode="Tile" Stretch="None"/>
+			-->
+    	</Grid.Background>
+    	<Canvas x:Name="canvasPaper">
+
+    	</Canvas>
+    </Grid>
+</UserControl>

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldLPCProject", "AldLPCProject\AldLPCProject.csproj", "{31194F60-8E29-4A3F-873E-96170A247567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldSpecialAlgorithms", "..\..\MyModules\AldSpecialAlgorithms\AldSpecialAlgorithms\AldSpecialAlgorithms.csproj", "{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldExtraControls", "..\..\MyModules\AldExtraControls\AldExtraControls\AldExtraControls.csproj", "{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31194F60-8E29-4A3F-873E-96170A247567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31194F60-8E29-4A3F-873E-96170A247567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31194F60-8E29-4A3F-873E-96170A247567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31194F60-8E29-4A3F-873E-96170A247567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

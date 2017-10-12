@@ -1,0 +1,5 @@
+LIBRARY TsFFTWDll.dll
+EXPORTS
+	FFT
+	MultipleFFT
+	Test

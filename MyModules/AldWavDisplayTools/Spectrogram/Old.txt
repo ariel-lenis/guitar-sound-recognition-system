@@ -1,0 +1,88 @@
+﻿        public bool GenerateSpectogramOld2(float[] data, int start, int n, int fftsize, float overlappercent)
+        {
+            n = (n / fftsize) * fftsize;
+            int columns = n / fftsize;
+            int rows = fftsize / 2;
+
+            D.Bitmap thebmp = new D.Bitmap(columns, rows);
+            source = new AldBitmapSourceCreator(thebmp.Width, thebmp.Height);
+            gbmp = D.Graphics.FromImage(thebmp);
+
+            gbmp.FillRectangle(D.Brushes.Black, 0, 0, w, h);
+
+            data = AldCUDA.AldCudaFFT.XFFTBlocks(data, start, n, fftsize, AldCudaFFT.Direcion.Forward);
+            float max = data.Max();
+
+            for (int i = 0; i < columns; i++)
+            {
+                int ini = fftsize * i;
+                int count = fftsize;
+
+                for (int j = 0; j < rows; j++)
+                {
+                    
+                    //float val = data[ini+j] / max;
+                    float val = data[ini + j] / max;
+                    int pix = MapToPixelindex(val, 100, 255);
+                    //int pix = (int)(255 * val);
+                    if (pix > 255) pix = 255;
+                    //D.Color color =  PaletteValue(pix, 255); // D.Color.FromArgb((byte)(val*255),0,0) ;
+                    pix = 255 - pix;
+                    D.Color color = D.Color.FromArgb((byte)(pix), (byte)(pix), (byte)(pix));
+                    gbmp.DrawLine(new D.Pen(color, 1), i, rows - j, i + 1, rows - j);
+                }
+
+            }
+            source.DrawImage(thebmp);
+            canvas.Source = source.Bmp;
+            canvas.Stretch = System.Windows.Media.Stretch.Fill;
+            return true;
+        }
+        public bool GenerateSpectogramOld(float[] data,int start,int n,int fftsize,float overlappercent)
+        {
+
+            int columns = n/fftsize;
+            int rows = fftsize/2;
+
+            D.Bitmap thebmp = new D.Bitmap(columns, rows);
+            source = new AldBitmapSourceCreator(thebmp.Width, thebmp.Height);
+            gbmp = D.Graphics.FromImage(thebmp);
+
+            gbmp.FillRectangle(D.Brushes.Black, 0, 0, w, h);
+
+           
+
+            for (int i = 0; i < columns; i++)
+            {
+                int ini = start + fftsize*i;
+                int count = fftsize;
+
+                float[] fft = new float[count];
+                for (int j = 0; j < count; j++)
+                    fft[j] = data[ini + j];
+                Windows.ApplyHanning(fft);
+
+                fft = FastFourierTransform.FFT(fft);
+
+
+                float max = fft.Max();
+                //float prom = fft.Sum() / fft.Length;
+                for (int j = 0; j < rows; j++)
+                {
+                    float val = fft[j]/max*max;
+                    int pix = MapToPixelindex(val, 100, 255);
+                    if (pix > 255) pix = 255;
+                    //D.Color color =  PaletteValue(pix, 255); // D.Color.FromArgb((byte)(val*255),0,0) ;
+                    pix = 255 - pix;
+                    D.Color color = D.Color.FromArgb((byte)(pix), (byte)(pix), (byte)(pix));
+                    gbmp.DrawLine(new D.Pen(color,1), i, rows-j, i+1, rows-j);
+                }
+
+            }
+            source.DrawImage(thebmp);
+            canvas.Source = source.Bmp;
+            
+            //thebmp.Save("e:\\aqui.bmp");
+            canvas.Stretch = System.Windows.Media.Stretch.Fill;
+            return true;
+        }

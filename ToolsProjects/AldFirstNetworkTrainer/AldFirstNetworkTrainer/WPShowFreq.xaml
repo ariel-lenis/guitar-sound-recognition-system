@@ -1,0 +1,60 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:AldWavDisplayTools="clr-namespace:AldWavDisplayTools;assembly=AldWavDisplayTools" xmlns:AldExtraControls="clr-namespace:TsExtraControls;assembly=TsExtraControls" x:Class="AldFirstNetworkTrainer.WPShowFreq"
+        Title="WPShowFreq" Height="338" Width="544" WindowState="Maximized" Closing="Window_Closing">
+    <Grid Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="308"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18.934"/>
+            <RowDefinition Height="125*"/>
+            <RowDefinition Height="15.944"/>
+            <RowDefinition Height="15.944"/>
+            <RowDefinition Height="89*"/>
+            <RowDefinition Height="21.587"/>
+            <RowDefinition Height="21.333"/>
+        </Grid.RowDefinitions>
+
+        <AldExtraControls:UsrAldPlotterPoints x:Name="plotter" Background="#FFCBCBCB" Grid.Column="2" Grid.RowSpan="2"/>
+        <Slider x:Name="sliderAxisX" Grid.Row="3" ValueChanged="sliderAxisX_ValueChanged" Grid.Column="2" Margin="0,0.001,0,0"/>
+        <AldExtraControls:UsrAldPlotterPoints x:Name="plotter2" Background="#FF979CFF" Grid.Column="2" Grid.RowSpan="3" Grid.Row="4"/>
+        <Grid>
+
+        	<Grid.ColumnDefinitions>
+        		<ColumnDefinition Width="1*"/>
+        		<ColumnDefinition Width="1*"/>
+        	</Grid.ColumnDefinitions>
+        	<Button x:Name="btnPlay" Content="Play Wave" RenderTransformOrigin="0.5,0.5" Click="btnPlay_Click" Margin="0">
+        		<Button.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform AngleY="0.217"/>
+        				<RotateTransform/>
+        				<TranslateTransform Y="0.163"/>
+        			</TransformGroup>
+        		</Button.RenderTransform>
+        	</Button>
+        	<Button x:Name="btnPlayMIDI" Content="Play MIDI" Margin="0" Click="btnPlayMIDI_Click" Grid.Column="1"/>
+        </Grid>
+        <DataGrid x:Name="gridMarkers" Grid.RowSpan="4" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" MouseDoubleClick="gridMarkers_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="SNote" Binding="{Binding SNote}"/>
+                <DataGridTextColumn Width="1*" Header="Type" Binding="{Binding Type}"/>
+                <DataGridTextColumn Width="1*" Header="Hz" Binding="{Binding Frequency}"/>
+                <DataGridTemplateColumn Header="Options">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="►" FontFamily="Consolas" Click="btnPlayMarkerMIDI_Click"  ></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="7" Background="#FF0068FF"/>
+        <Label x:Name="lblFrequency" Content="F: 0 Hz" Grid.Column="2" Grid.Row="2" Padding="0" Margin="0,0,0,-0.001"/>
+    </Grid>
+</Window>

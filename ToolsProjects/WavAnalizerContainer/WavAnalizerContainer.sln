@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WavAnalizerContainer", "WavAnalizerContainer\WavAnalizerContainer.csproj", "{0294C28E-D3D6-42E2-A8D9-ECC05ABC217C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldSpecialAlgorithms", "..\..\MyModules\AldSpecialAlgorithms\AldSpecialAlgorithms\AldSpecialAlgorithms.csproj", "{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsFFTFramework", "..\..\MyModules\AldCUDA\AldCUDA\TsFFTFramework.csproj", "{326FFE7D-5835-45FA-AD9C-BB5EB0AC9A18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsExtraControls", "..\..\MyModules\TsExtraControls\TsExtraControls.csproj", "{08E79ED3-1AC0-4D8B-AD8F-4DBF1F9671B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsFilesTools", "..\..\MyModules\TsFilesTools\TsFilesTools.csproj", "{DC260EF4-999A-423B-9F7B-4AAD19B69534}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldWavDisplayTools", "..\..\MyModules\AldWavDisplayTools\AldWavDisplayTools.csproj", "{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0294C28E-D3D6-42E2-A8D9-ECC05ABC217C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0294C28E-D3D6-42E2-A8D9-ECC05ABC217C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0294C28E-D3D6-42E2-A8D9-ECC05ABC217C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0294C28E-D3D6-42E2-A8D9-ECC05ABC217C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326FFE7D-5835-45FA-AD9C-BB5EB0AC9A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326FFE7D-5835-45FA-AD9C-BB5EB0AC9A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326FFE7D-5835-45FA-AD9C-BB5EB0AC9A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326FFE7D-5835-45FA-AD9C-BB5EB0AC9A18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08E79ED3-1AC0-4D8B-AD8F-4DBF1F9671B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E79ED3-1AC0-4D8B-AD8F-4DBF1F9671B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E79ED3-1AC0-4D8B-AD8F-4DBF1F9671B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08E79ED3-1AC0-4D8B-AD8F-4DBF1F9671B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC260EF4-999A-423B-9F7B-4AAD19B69534}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC260EF4-999A-423B-9F7B-4AAD19B69534}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC260EF4-999A-423B-9F7B-4AAD19B69534}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC260EF4-999A-423B-9F7B-4AAD19B69534}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,67 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:AldExtraControls="clr-namespace:TsExtraControls;assembly=TsExtraControls"
+        xmlns:AldWavDisplayTools="clr-namespace:AldWavDisplayTools;assembly=AldWavDisplayTools" x:Class="TsRecorder.MainWindow"
+        Width="700" Height="415" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Background="White">
+    <Window.Resources>
+        <Storyboard x:Key="OnLoaded1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="ellipse" RepeatBehavior="Forever">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.78">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.78">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="ellipse">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="320"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <AldWavDisplayTools:AldCompleteDisplayer x:Name="wavDisplayer" Margin="10"/>
+        <Button x:Name="btnGrabar" Content="Record" HorizontalAlignment="Left" Height="35" Margin="10,10,0,0" VerticalAlignment="Top" Width="91" Grid.Row="1" Foreground="White" Background="#FF0080FF" Click="btnGrabar_Click"/>
+        <Button x:Name="btnRecortar" Content="Cut" HorizontalAlignment="Left" Height="35" Margin="106,10,0,0" VerticalAlignment="Top" Width="91" Grid.Row="1" Background="#FF0080FF" Foreground="White" Click="btnRecortar_Click"/>
+        <Button x:Name="btnUsar" Content="Use This" HorizontalAlignment="Left" Height="35" Margin="202,10,0,0" VerticalAlignment="Top" Width="91" Grid.Row="1" Foreground="White" Background="#FF0080FF" Click="btnUsar_Click"/>
+        <Grid x:Name="gridRecording" Height="388" Margin="0,-2,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Background="#CC00183A" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="210"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="195*"/>
+                <RowDefinition Height="193*"/>
+            </Grid.RowDefinitions>
+            <Ellipse x:Name="ellipse" Margin="10,10,9,10">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF008BFF" Offset="0"/>
+                        <GradientStop Offset="0.78" Color="#00008BFF"/>
+                        <GradientStop Color="#85008BFF" Offset="0.5"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <AldExtraControls:UsrAldPlotterPoints x:Name="plotter" Margin="10" Background="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+            <Label x:Name="lblTimeRecording" Content="00:00:15.1234" Grid.Column="1" Height="75" Margin="10,0" VerticalAlignment="Center" Background="{x:Null}" Foreground="White" FontSize="48" HorizontalAlignment="Center"/>
+            <Button x:Name="btnStop" Content="Stop" Background="#FF0046FF" Foreground="White" HorizontalAlignment="Right" Width="62" Height="37" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,10,10" Click="btnStop_Click" />
+        </Grid>
+        <Label x:Name="lblTimeRecorded" Content="00:00:00" Height="35" Margin="0,10,10,21" VerticalAlignment="Center" Background="{x:Null}" Foreground="White" FontSize="26.667" HorizontalAlignment="Right" Grid.Row="1" Padding="0"/>
+    </Grid>
+</Window>

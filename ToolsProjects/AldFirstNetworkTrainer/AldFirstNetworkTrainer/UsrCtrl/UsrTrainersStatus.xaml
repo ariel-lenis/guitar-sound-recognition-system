@@ -1,0 +1,61 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="AldFirstNetworkTrainer.UsrTrainersStatus"
+	x:Name="UserControl" Height="1041" Width="1699">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid x:Name="gridPlotter1" Background="White" Margin="0" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="898*"/>
+				<RowDefinition Height="5*"/>
+				<RowDefinition Height="138"/>
+			</Grid.RowDefinitions>
+			<WindowsFormsHost x:Name="windowsHost" Background="#FF00FF80" Margin="0"/>
+			<GridSplitter HorizontalAlignment="Stretch" Grid.Row="1" Background="#FF0080FF"/>
+			<Grid Grid.Row="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="25"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1126*"/>
+					<ColumnDefinition Width="204*"/>
+					<ColumnDefinition Width="239*"/>
+					<ColumnDefinition Width="130*"/>
+				</Grid.ColumnDefinitions>
+				<DataGrid x:Name="dataGridTrainingStatus" Background="White" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="Cell" Grid.ColumnSpan="4">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Color">
+							<DataGridTemplateColumn.CellStyle>
+								<Style TargetType="{x:Type DataGridCell}">
+									<Setter Property="Background" Value="{Binding TheBrush}" />
+								</Style>
+							</DataGridTemplateColumn.CellStyle>
+						</DataGridTemplateColumn>
+						<DataGridTextColumn Width="1*" Header="Network" Binding="{Binding Network, Mode=TwoWay}" Foreground="{Binding TheColor, Mode=TwoWay}"/>
+						<DataGridTextColumn Width="1*" Header="AverageTime" Binding="{Binding AverageTime, Mode=TwoWay}"/>
+						<DataGridTextColumn Width="1*" Header="Epochs" Binding="{Binding Epochs, Mode=TwoWay}"/>
+
+						<DataGridTextColumn Width="1*" Header="TrainsPerEpoch" Binding="{Binding TrainsPerEpoch, Mode=TwoWay}"/>
+
+						<DataGridTemplateColumn Header="Accion" Width="200">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Button Click="StartStopTraining" Background="White" BorderBrush="#FF00A2FF" Content="{Binding Status, Mode=TwoWay}" BorderThickness="2,1,1,2"/> 
+								</DataTemplate>									
+							</DataGridTemplateColumn.CellTemplate>									
+						</DataGridTemplateColumn>
+
+					</DataGrid.Columns>
+				</DataGrid>
+				<Label Content="Number of Error Trainings Per Mark :" Padding="0" VerticalContentAlignment="Center" Grid.Column="1"/>
+				<TextBox x:Name="txtBugCount" Grid.Column="2" TextWrapping="Wrap" Text="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+				<Button x:Name="btnBugCount" Content="Cambiar" Grid.Column="3"/>
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>

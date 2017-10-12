@@ -1,0 +1,8 @@
+﻿<Window x:Class="AldFirstNetworkTrainer.WPFAuxPlotter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPFAuxPlotter" Height="340" Width="468">
+    <Grid>
+
+    </Grid>
+</Window>

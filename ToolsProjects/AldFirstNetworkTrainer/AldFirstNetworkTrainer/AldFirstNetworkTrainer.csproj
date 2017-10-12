@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CB458EC5-7A4F-488E-A285-FF4FAFCBED94}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AldFirstNetworkTrainer</RootNamespace>
+    <AssemblyName>AldFirstNetworkTrainer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.50429.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Sanford.Collections, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ExternModules\SanfordMIDI\Sanford.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ExternModules\SanfordMIDI\Sanford.Multimedia.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia.Timers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ExternModules\SanfordMIDI\Sanford.Multimedia.Timers.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Threading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ExternModules\SanfordMIDI\Sanford.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\..\..\MyModules\TsExtraControls\bin\Debug\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Midi\TsMIDICreator.cs" />
+    <Compile Include="Trainers\TsNetworksDispatcher.cs" />
+    <Compile Include="Trainers\TsTrainingInfo.cs" />
+    <Compile Include="Trainers\TsFirsStepSolution.cs" />
+    <Compile Include="UsrCtrl\UsrAdminTrainers.xaml.cs">
+      <DependentUpon>UsrAdminTrainers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsrCtrl\UsrBlock.xaml.cs">
+      <DependentUpon>UsrBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsrCtrl\UsrResults.xaml.cs">
+      <DependentUpon>UsrResults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsrCtrl\UsrTrainerFrequenciesStatus.xaml.cs">
+      <DependentUpon>UsrTrainerFrequenciesStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsrCtrl\UsrTrainersStatus.xaml.cs">
+      <DependentUpon>UsrTrainersStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Midi\AldExtensors.cs" />
+    <Compile Include="Midi\AldMidiPlayer.cs" />
+    <Compile Include="Midi\InstrumentsManager.cs" />
+    <Compile Include="Networks\IGeneralizedNetwork.cs" />
+    <Compile Include="Networks\TsCudaNetwork.cs" />
+    <Compile Include="Networks\TsFastNetwork.cs" />
+    <Compile Include="Networks\TsNetworkBackup.cs" />
+    <Compile Include="TestANNCuda.cs" />
+    <Compile Include="TsAdminAllFrequencies.cs" />
+    <Compile Include="TsTrainerFrequencies.cs" />
+    <Compile Include="UsrCtrl\UsrNeuralNetworksControl.xaml.cs">
+      <DependentUpon>UsrNeuralNetworksControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UsrCtrl\UsrStringTunning.xaml.cs">
+      <DependentUpon>UsrStringTunning.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFAuxPlotter.xaml.cs">
+      <DependentUpon>WPFAuxPlotter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfRecordAndEdit.xaml.cs">
+      <DependentUpon>WpfRecordAndEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFScoreDisplayer.xaml.cs">
+      <DependentUpon>WPFScoreDisplayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfShowNetworkStatus.xaml.cs">
+      <DependentUpon>WpfShowNetworkStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFTrainer2.xaml.cs">
+      <DependentUpon>WPFTrainer2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPFTrainerMusic.xaml.cs">
+      <DependentUpon>WPFTrainerMusic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfTunner.xaml.cs">
+      <DependentUpon>WpfTunner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPShowFreq.xaml.cs">
+      <DependentUpon>WPShowFreq.xaml</DependentUpon>
+    </Compile>
+    <Page Include="UsrCtrl\UsrAdminTrainers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UsrCtrl\UsrBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UsrCtrl\UsrResults.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UsrCtrl\UsrTrainerFrequenciesStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UsrCtrl\UsrTrainersStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="TsColors.cs" />
+    <Compile Include="TrainerAllTimes.cs" />
+    <Compile Include="TrainerOne.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TrainerOneSpectogram.cs" />
+    <Compile Include="ITrainer.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UsrCtrl\UsrNeuralNetworksControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UsrCtrl\UsrStringTunning.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPFAuxPlotter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfRecordAndEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPFScoreDisplayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfShowNetworkStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFTrainer2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFTrainerMusic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfTunner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPShowFreq.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ExternModules\SanfordMIDI\Sanford.Multimedia.Midi\Sanford.Multimedia.Midi.csproj">
+      <Project>{4269c72a-8d3a-4737-8f89-72eaa33ea9e1}</Project>
+      <Name>Sanford.Multimedia.Midi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\AaBackPropagationFast\AaBackPropagationFast.csproj">
+      <Project>{4ecd13ba-31ad-442e-b7d1-827bed170ff8}</Project>
+      <Name>AaBackPropagationFast</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\AldCUDA\AldCUDA\TsFFTFramework.csproj">
+      <Project>{5a053189-a811-4efe-83fe-96fc30914738}</Project>
+      <Name>TsFFTFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\AldSpecialAlgorithms\AldSpecialAlgorithms\AldSpecialAlgorithms.csproj">
+      <Project>{6ddd9911-26b7-4948-bdb9-47ed3a939d5a}</Project>
+      <Name>AldSpecialAlgorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\AldWavDisplayTools\AldWavDisplayTools.csproj">
+      <Project>{6e660be6-34a5-41d6-84d5-5e90ba6939bd}</Project>
+      <Name>AldWavDisplayTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\TsExtraControls\TsExtraControls.csproj">
+      <Project>{ab2deb0a-9a8c-452e-8668-9a24ffd4bd54}</Project>
+      <Name>TsExtraControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\TsFilesTools\TsFilesTools.csproj">
+      <Project>{082d77f5-f64f-413a-b1f0-e9ba91d3ef19}</Project>
+      <Name>TsFilesTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\TsMusicXMLDisplayer\TsMusicXMLDisplayer\TsMusicXMLDisplayer.csproj">
+      <Project>{3605f1c2-52c3-42c3-8cf2-de308f799466}</Project>
+      <Name>TsMusicXMLDisplayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\TsPentagramTools\TsPentagramEngine\TsPentagramEngine.csproj">
+      <Project>{d8d89832-eef5-47a4-b862-a7bfa919662f}</Project>
+      <Name>TsPentagramEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TsRecorder\TsRecorder\TsRecorder.csproj">
+      <Project>{33c07b09-08ff-4082-a8ae-4c6cc57702bb}</Project>
+      <Name>TsRecorder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\MusicKey.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BlendEmbeddedFont Include="Fonts\Musical.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </BlendEmbeddedFont>
+    <Resource Include="oldloaders.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

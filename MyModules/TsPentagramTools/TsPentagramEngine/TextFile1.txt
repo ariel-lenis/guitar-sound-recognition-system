@@ -1,0 +1,159 @@
+﻿        public static NoteTime MaxCompatible(float val, float[] fvalues)
+        {
+            int idx = -1;
+            int puntillos = 0;
+            float mindist = 0;
+
+            //if the time exceeds the limits then a Redonda its the max value
+            if (val > fvalues[0]) return new NoteTime() { Figure = NoteTime.EFigures.Redonda, Puntillos = 0 };
+
+            for (int i = 0; i < 7; i++)
+            {
+                float fvalue = fvalues[i];
+
+                for(int ip=0;ip<=2;ip++)
+                {
+                    float thevalue = fvalue * NoteTime.PuntillosValues[ip];
+
+                    if (thevalue <= val && (idx == -1 ||  Math.Abs(val - thevalue) < mindist))
+                    {
+                        idx = i;
+                        puntillos = ip;
+                        mindist = Math.Abs(val - thevalue);
+                    }
+                }
+            }
+            
+            //error =  mindist / val;
+            if (idx == -1)
+                return null; 
+            return new NoteTime() { Figure = (NoteTime.EFigures)idx, Puntillos = puntillos };
+        }
+
+
+
+        public string Parse(Stream fs,float center)
+        {
+            MusicXML.scorepartwise partwise = PrepareBase();
+            Partwise mpartwise = new Partwise();
+
+            int numerator = 4;
+            int denominator = 4;
+
+
+            List<MusicXML.scorepartwisePartMeasure> measures = new List<MusicXML.scorepartwisePartMeasure>();
+
+            MusicXML.time time = new MusicXML.time();
+            time.Items = new object[] { numerator+"", denominator+"" };
+            time.ItemsElementName = new MusicXML.ItemsChoiceType9[] { MusicXML.ItemsChoiceType9.beats, MusicXML.ItemsChoiceType9.beattype };
+            
+            MusicXML.clef clef = new MusicXML.clef();
+            clef.line = "2";
+            clef.sign = MusicXML.clefsign.G;
+            clef.clefoctavechange = "0";
+
+
+            List<WithDuration> elements = ParseNotes(mpartwise, data, center,numerator,denominator);
+
+            MusicXML.scorepartwisePartMeasure measure = null;
+
+            double currentacum = 0;
+
+            int timetime = 1024;
+
+            List<object> notes = null;
+
+            bool first = true;
+
+            MusicXML.direction direcction = CreateDirection(center);
+
+            for (int i = 0; i < elements.Count; i++)
+            {
+                if (measure == null)
+                {
+                    notes = new List<object>();
+                    measure = new MusicXML.scorepartwisePartMeasure();
+                    measure.number = measures.Count + "";
+                    if (first)
+                    {
+                        MusicXML.attributes attributes = new MusicXML.attributes();
+                        attributes.clef = new MusicXML.clef[] { clef };
+                        attributes.time = new MusicXML.time[] { time };
+                        attributes.divisions = timetime;
+                        attributes.divisionsSpecified = true;
+                        notes.Add(attributes);
+                        notes.Add(direcction);
+                        first = false;
+                    }
+                    //measure.Items = new object[] { attributes };
+                }
+
+                var element = elements[i];
+                float value = element.Duration.Value;
+
+
+                Dictionary<MusicXML.ItemsChoiceType1, object> dnote;
+                if (element is Note)
+                {
+                    Note enote = element as Note;
+                    for (int j = 0; j < enote.Chords.Count; j++)
+                    {
+                        dnote = new Dictionary<MusicXML.ItemsChoiceType1, object>();
+
+                        if (j > 0)
+                            dnote.Add(MusicXML.ItemsChoiceType1.chord, new MusicXML.empty());
+
+                        MusicXML.pitch pitch = new MusicXML.pitch();
+                        dnote.Add(MusicXML.ItemsChoiceType1.pitch, pitch);
+
+                        MusicXML.note note = new MusicXML.note();
+
+                        dnote.Add(MusicXML.ItemsChoiceType1.duration, (decimal)(value * timetime));
+                        if (enote.Chords[j].Alter != NoteData.EAlters.Normal)
+                            pitch.alter = (int)enote.Chords[j].Alter;
+
+                        pitch.octave = enote.Chords[j].Octave + "";
+                        pitch.step = FindStep(enote.Chords[j].Note);
+
+
+
+                        note.Items = dnote.Values.Select(x => (object)x).ToArray();
+                        note.ItemsElementName = dnote.Keys.ToArray();
+                        notes.Add(note);
+                    }
+                }
+                else
+                {
+
+                    dnote = new Dictionary<MusicXML.ItemsChoiceType1, object>();
+                    MusicXML.note note = new MusicXML.note();
+
+                    dnote.Add(MusicXML.ItemsChoiceType1.rest, new MusicXML.displaystepoctave() { displayoctave = "4", displaystep = MusicXML.step.B });
+                    dnote.Add(MusicXML.ItemsChoiceType1.duration, (decimal)(value * timetime));
+                    //dnote.Add(MusicXML.ItemsChoiceType1., new MusicXML.empty());
+
+                    //MusicXML.
+
+                    note.Items = dnote.Values.Select(x => (object)x).ToArray();
+                    note.ItemsElementName = dnote.Keys.ToArray();
+                    notes.Add(note);
+
+                }
+
+                currentacum += value;
+
+
+                if (currentacum >= 4)
+                {
+                    Console.WriteLine("Correct:" + (currentacum - 4));
+                    measure.Items = notes.Select(x => (object)x).ToArray();
+                    measures.Add(measure);
+                    currentacum = 0;
+                    measure = null;
+                }
+            }
+
+            partwise.part[0].measure = measures.ToArray();
+
+            return this.WriteOnStream(fs, partwise);
+        }

@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldFirstNetworkTrainer", "AldFirstNetworkTrainer\AldFirstNetworkTrainer.csproj", "{CB458EC5-7A4F-488E-A285-FF4FAFCBED94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldSpecialAlgorithms", "..\..\MyModules\AldSpecialAlgorithms\AldSpecialAlgorithms\AldSpecialAlgorithms.csproj", "{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsFFTFramework", "..\..\MyModules\AldCUDA\AldCUDA\TsFFTFramework.csproj", "{5A053189-A811-4EFE-83FE-96FC30914738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AaBackPropagationFast", "..\..\MyModules\AaBackPropagationFast\AaBackPropagationFast.csproj", "{4ECD13BA-31AD-442E-B7D1-827BED170FF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sanford.Multimedia.Midi", "..\..\ExternModules\SanfordMIDI\Sanford.Multimedia.Midi\Sanford.Multimedia.Midi.csproj", "{4269C72A-8D3A-4737-8F89-72EAA33EA9E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsFilesTools", "..\..\MyModules\TsFilesTools\TsFilesTools.csproj", "{082D77F5-F64F-413A-B1F0-E9BA91D3EF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsExtraControls", "..\..\MyModules\TsExtraControls\TsExtraControls.csproj", "{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldWavDisplayTools", "..\..\MyModules\AldWavDisplayTools\AldWavDisplayTools.csproj", "{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsPentagramEngine", "..\..\MyModules\TsPentagramTools\TsPentagramEngine\TsPentagramEngine.csproj", "{D8D89832-EEF5-47A4-B862-A7BFA919662F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsMusicXMLDisplayer", "..\..\MyModules\TsMusicXMLDisplayer\TsMusicXMLDisplayer\TsMusicXMLDisplayer.csproj", "{3605F1C2-52C3-42C3-8CF2-DE308F799466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsRecorder", "..\TsRecorder\TsRecorder\TsRecorder.csproj", "{33C07B09-08FF-4082-A8AE-4C6CC57702BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB458EC5-7A4F-488E-A285-FF4FAFCBED94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB458EC5-7A4F-488E-A285-FF4FAFCBED94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB458EC5-7A4F-488E-A285-FF4FAFCBED94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB458EC5-7A4F-488E-A285-FF4FAFCBED94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDD9911-26B7-4948-BDB9-47ED3A939D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A053189-A811-4EFE-83FE-96FC30914738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A053189-A811-4EFE-83FE-96FC30914738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A053189-A811-4EFE-83FE-96FC30914738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A053189-A811-4EFE-83FE-96FC30914738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ECD13BA-31AD-442E-B7D1-827BED170FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ECD13BA-31AD-442E-B7D1-827BED170FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ECD13BA-31AD-442E-B7D1-827BED170FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ECD13BA-31AD-442E-B7D1-827BED170FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4269C72A-8D3A-4737-8F89-72EAA33EA9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4269C72A-8D3A-4737-8F89-72EAA33EA9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4269C72A-8D3A-4737-8F89-72EAA33EA9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4269C72A-8D3A-4737-8F89-72EAA33EA9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{082D77F5-F64F-413A-B1F0-E9BA91D3EF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{082D77F5-F64F-413A-B1F0-E9BA91D3EF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{082D77F5-F64F-413A-B1F0-E9BA91D3EF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{082D77F5-F64F-413A-B1F0-E9BA91D3EF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E660BE6-34A5-41D6-84D5-5E90BA6939BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D89832-EEF5-47A4-B862-A7BFA919662F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3605F1C2-52C3-42C3-8CF2-DE308F799466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C07B09-08FF-4082-A8AE-4C6CC57702BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C07B09-08FF-4082-A8AE-4C6CC57702BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C07B09-08FF-4082-A8AE-4C6CC57702BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C07B09-08FF-4082-A8AE-4C6CC57702BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
