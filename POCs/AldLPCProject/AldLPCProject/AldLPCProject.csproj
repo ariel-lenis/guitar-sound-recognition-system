@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,13 +79,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MyModules\AldExtraControls\AldExtraControls\AldExtraControls.csproj">
-      <Project>{ab2deb0a-9a8c-452e-8668-9a24ffd4bd54}</Project>
-      <Name>AldExtraControls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MyModules\AldSpecialAlgorithms\AldSpecialAlgorithms\AldSpecialAlgorithms.csproj">
       <Project>{6ddd9911-26b7-4948-bdb9-47ed3a939d5a}</Project>
       <Name>AldSpecialAlgorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MyModules\TsExtraControls\TsExtraControls.csproj">
+      <Project>{db973689-e661-4573-86e5-c0437b9e4e6d}</Project>
+      <Name>TsExtraControls</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

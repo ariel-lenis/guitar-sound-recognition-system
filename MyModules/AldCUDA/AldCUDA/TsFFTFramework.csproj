@@ -74,11 +74,10 @@
     <Content Include="..\..\..\ExternModules\fftw-3.3.5-dll32\libfftw3l-3.dll">
       <Link>libfftw3l-3.dll</Link>
     </Content>
-    <Content Include="..\..\TsCudaDll\Debug\TsCudaDll.dll">
+    <Content Include="..\..\TsCudaDll\TsCudaDll\Debug\TsCudaDll.dll">
       <Link>TsCudaDll.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\TsFFTWDll\Debug\TsFFTWDll.dll">
+    <Content Include="..\..\TsFFTWDll\TsFFTWDll\Debug\TsFFTWDll.dll">
       <Link>TsFFTWDll.dll</Link>
     </Content>
   </ItemGroup>

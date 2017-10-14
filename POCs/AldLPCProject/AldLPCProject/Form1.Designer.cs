@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
-            this.aldPlotterPoints1 = new AldExtraControls.AldPlotterPoints();
+            this.aldPlotterPoints1 = new TsExtraControls.AldPlotterPoints();
             this.SuspendLayout();
             // 
             // button1
@@ -45,13 +45,14 @@
             // 
             // aldPlotterPoints1
             // 
-            this.aldPlotterPoints1.AxisX = ((AldExtraControls.AldPlotterPoints.AxisConfig)(resources.GetObject("aldPlotterPoints1.AxisX")));
-            this.aldPlotterPoints1.AxisY = ((AldExtraControls.AldPlotterPoints.AxisConfig)(resources.GetObject("aldPlotterPoints1.AxisY")));
+            this.aldPlotterPoints1.AxisX = ((TsExtraControls.Extra.AxisConfig)(resources.GetObject("aldPlotterPoints1.AxisX")));
+            this.aldPlotterPoints1.AxisY = ((TsExtraControls.Extra.AxisConfig)(resources.GetObject("aldPlotterPoints1.AxisY")));
             this.aldPlotterPoints1.Location = new System.Drawing.Point(14, 59);
             this.aldPlotterPoints1.Name = "aldPlotterPoints1";
             this.aldPlotterPoints1.Size = new System.Drawing.Size(718, 480);
             this.aldPlotterPoints1.TabIndex = 1;
             this.aldPlotterPoints1.Title = "Title";
+            this.aldPlotterPoints1.Load += new System.EventHandler(this.aldPlotterPoints1_Load);
             // 
             // Form1
             // 
@@ -69,7 +70,7 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private AldExtraControls.AldPlotterPoints aldPlotterPoints1;
+        private TsExtraControls.AldPlotterPoints aldPlotterPoints1;
     }
 }
 

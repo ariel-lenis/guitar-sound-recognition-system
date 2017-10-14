@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}</ProjectGuid>
+    <ProjectGuid>{DB973689-E661-4573-86E5-C0437B9E4E6D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TsExtraControls</RootNamespace>

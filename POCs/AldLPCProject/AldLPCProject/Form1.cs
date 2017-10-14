@@ -54,7 +54,7 @@ namespace AldLPCProject
                 Console.WriteLine("Alpha[{0}]={1}", i, res.Alphas[i]);
             Console.WriteLine("Error={0}", res.Error);
             Console.WriteLine();
-            
+            */
 
 
             res = AldLPC.LPC(data, p);
@@ -63,13 +63,13 @@ namespace AldLPCProject
             Console.WriteLine("Error={0}", res.Error);
 
             Console.WriteLine();
-            */
-
+            
+            /*
             res = AldLPC.LPCMatlab(emph, p);
             for (int i = 0; i < res.Alphas.Length; i++)
                 Console.WriteLine("Alpha[{0}]={1}", i, res.Alphas[i]);
             Console.WriteLine("Error={0}", res.Error);
-
+            */
 
             var waveLPC = new float[emph.Length];
 
@@ -94,6 +94,11 @@ namespace AldLPCProject
             //aldPlotterPoints1.AddCurve("Onda",x, data, Color.Red);
             aldPlotterPoints1.AddCurve("Error", x, error, Color.DarkGreen);
             //aldPlotterPoints1.AddCurve("Emph", x, emph, Color.Gold);
+
+        }
+
+        private void aldPlotterPoints1_Load(object sender, EventArgs e)
+        {
 
         }
     }
