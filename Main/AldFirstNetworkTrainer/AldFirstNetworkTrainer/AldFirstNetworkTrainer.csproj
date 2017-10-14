@@ -279,7 +279,7 @@
       <Project>{d8d89832-eef5-47a4-b862-a7bfa919662f}</Project>
       <Name>TsPentagramEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\TsRecorder\TsRecorder\TsRecorder.csproj">
+    <ProjectReference Include="..\..\..\Tools\TsRecorder\TsRecorder\TsRecorder.csproj">
       <Project>{33c07b09-08ff-4082-a8ae-4c6cc57702bb}</Project>
       <Name>TsRecorder</Name>
     </ProjectReference>

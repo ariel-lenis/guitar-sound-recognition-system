@@ -29,7 +29,7 @@ namespace TestMyNetwork
         Displayer displayer;
         public Form1()
         {
-            int[] layersize = {2,128,64,1};
+            int[] layersize = { 2, 128, 64, 1 };
 
             networks = new IGeneralizedNetwork[2];
 

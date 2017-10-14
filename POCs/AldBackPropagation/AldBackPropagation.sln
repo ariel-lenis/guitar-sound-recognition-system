@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldBackPropagation", "AldBackPropagation\AldBackPropagation.csproj", "{9686D786-B0E8-4E34-8A95-F758E766D22C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAldBackPropagation", "TestAldBackPropagation\TestAldBackPropagation.csproj", "{574CAD73-3EEF-4F9D-9B0A-76AB10A5F6B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldExtraControls", "..\AldExtraControls\AldExtraControls\AldExtraControls.csproj", "{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsExtraControls", "..\TsExtraControls\TsExtraControls.csproj", "{DB973689-E661-4573-86E5-C0437B9E4E6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +23,10 @@ Global
 		{574CAD73-3EEF-4F9D-9B0A-76AB10A5F6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574CAD73-3EEF-4F9D-9B0A-76AB10A5F6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{574CAD73-3EEF-4F9D-9B0A-76AB10A5F6B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB2DEB0A-9A8C-452E-8668-9A24FFD4BD54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB973689-E661-4573-86E5-C0437B9E4E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB973689-E661-4573-86E5-C0437B9E4E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB973689-E661-4573-86E5-C0437B9E4E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB973689-E661-4573-86E5-C0437B9E4E6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,20 +9,20 @@ namespace TestMyNetwork
 {
     public unsafe class TsCudaANN:IGeneralizedNetwork
     {
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern IntPtr cudaANNCreateNetwork(int[] layerssize, int layers);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNTrain(IntPtr thedata,float[] inputs,float[] expected,float alpha,float learningrate,out float totalerror);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNForward(IntPtr thedata, float[] inputs, float[] outputs, float alpha);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNFree(IntPtr thedata);
 
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNTrain(IntPtr thedata, float* inputs, float* expected, float alpha, float learningrate, out float totalerror);
 
 

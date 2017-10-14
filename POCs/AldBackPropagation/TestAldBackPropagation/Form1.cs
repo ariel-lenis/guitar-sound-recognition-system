@@ -44,7 +44,7 @@ namespace TestAldBackPropagation
 
                 if (c > 1) c = 1;
 
-                network.Train(new float[] { a, b }, new float[] { c }, 10);                
+                network.Train(new float[] { a, b }, new float[] { c });                
                 error+= network.TotalError(new float[]{c});
                 if (i % 4 == 0 && i > 0)
                 {
@@ -60,7 +60,7 @@ namespace TestAldBackPropagation
                 var linkC = network[1][0].Inputs[2];
                 Console.WriteLine(linkA.Weight + " " + linkB.Weight + " " + linkC.Weight+" "+(linkA == linkB));*/
                 aldPlotterPoints1.ClearCurves();
-                aldPlotterPoints1.AddCurve("avgError", errors, Color.Blue, AldExtraControls.AldPlotterPoints.AdaptedSymbolType.None);
+                aldPlotterPoints1.AddCurve("avgError", errors, Color.Blue, TsExtraControls.Extra.AdaptedSymbolType.None);
                 this.lblActualError.Text = "E:" + errors.Last();
             }));
         }
@@ -133,7 +133,7 @@ namespace TestAldBackPropagation
             if (errors.Count > 0)
             {
                 aldPlotterPoints1.ClearCurves();
-                aldPlotterPoints1.AddCurve("avgError", errors, Color.Blue, AldExtraControls.AldPlotterPoints.AdaptedSymbolType.None);
+                aldPlotterPoints1.AddCurve("avgError", errors, Color.Blue, TsExtraControls.AldPlotterPoints.AdaptedSymbolType.None);
                 this.lblActualError.Text = "E:" + errors.Last();
             }
             t.Resume();*/
