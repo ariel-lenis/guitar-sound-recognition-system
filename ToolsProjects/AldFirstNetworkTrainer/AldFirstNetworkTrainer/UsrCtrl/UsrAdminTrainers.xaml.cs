@@ -68,6 +68,11 @@ namespace AldFirstNetworkTrainer
 
             List<TrainersDirectory> td = new List<TrainersDirectory>();
 
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             foreach(var ipath in Directory.GetDirectories(path))
             {
                 FileInfo snetwork = Directory.EnumerateDirectories(ipath).Select(x=>new FileInfo(x)).FirstOrDefault(x => x.Name.Equals("Networks", StringComparison.CurrentCultureIgnoreCase));

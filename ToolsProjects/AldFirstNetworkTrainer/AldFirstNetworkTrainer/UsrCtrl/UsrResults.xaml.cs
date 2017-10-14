@@ -187,7 +187,10 @@ namespace AldFirstNetworkTrainer
 
             List<FileInfo> files = new List<FileInfo>();
 
-
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
 
             files.AddRange(Directory.EnumerateFiles(ffd.SelectedPath, "*.xml").Select(x => new FileInfo(x)));
             files.AddRange(Directory.EnumerateFiles(ffd.SelectedPath, "*.mid").Select(x => new FileInfo(x)));

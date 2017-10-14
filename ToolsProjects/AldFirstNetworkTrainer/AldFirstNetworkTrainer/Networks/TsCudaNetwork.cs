@@ -11,22 +11,22 @@ namespace AldFirstNetworkTrainer.Networks
 {
     public class TsCudaNetwork:IGeneralizedNetwork
     {
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern IntPtr cudaANNCreateNetwork(int[] layerssize, int layers);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNTrain(IntPtr thedata, float[] inputs, float[] expected, float alpha, float learningrate, out float totalerror);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNForward(IntPtr thedata, float[] inputs, float[] outputs, float alpha);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNFree(IntPtr thedata);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNBackup(IntPtr thedata, out IntPtr ptr, out int size);
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaANNDll\Debug\TsCudaANNDll.dll")]
+        [DllImport("TsCudaANNDll.dll")]
         public static extern bool cudaANNRestore(IntPtr thedata, IntPtr weights, IntPtr bias);
 
         float _alpha;

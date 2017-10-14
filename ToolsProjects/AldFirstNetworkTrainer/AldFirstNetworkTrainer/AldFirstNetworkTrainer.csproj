@@ -297,6 +297,24 @@
     </BlendEmbeddedFont>
     <Resource Include="oldloaders.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\MyModules\TsCudaANNDll\TsCudaANNDll\Debug\TsCudaANNDll.dll">
+      <Link>TsCudaANNDll.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\MyModules\TsCudaDll\TsCudaDll\Debug\TsCudaDll.dll">
+      <Link>TsCudaDll.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\MyModules\TsFFTWDll\TsFFTWDll\Debug\TsFFTWDll.dll">
+      <Link>TsFFTWDll.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Tools\TsRecorder\TsRecorder\bin\Debug\TsRecorder.exe">
+      <Link>TsRecorder.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

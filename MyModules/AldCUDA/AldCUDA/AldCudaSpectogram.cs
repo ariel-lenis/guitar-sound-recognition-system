@@ -138,11 +138,11 @@ namespace TsFFTFramework
             return result;
         }
 
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaDll\Release\TsCudaDll.dll")]
+        [DllImport("TsCudaDll.dll")]
         public static extern IntPtr HostCloneWaveToDevice(float[] wave, int n);
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaDll\Release\TsCudaDll.dll")]
+        [DllImport("TsCudaDll.dll")]
         public static extern int Spectrogram(IntPtr data,int n, int fftsize, int samplesrequired, float[] window, float[] output,out float mean,out float std);
-        [DllImport(@"I:\Tesis P1\Tesis\Tools\MyModules\TsCudaDll\Release\TsCudaDll.dll")]
+        [DllImport("TsCudaDll.dll")]
         public static extern void HostFastFourierTransform(IntPtr deviceData, int n, int direction);
 
 
