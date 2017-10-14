@@ -7,6 +7,7 @@ void _stdcall FFT(fftwf_complex* in,fftwf_complex* out,int n,int direction)
 	fftwf_execute(p);
 	fftwf_destroy_plan(p);
 }
+
 void _stdcall MultipleFFT(void* input,void* output,int blocksize,int nblocks,int direction)
 {
 	fftwf_plan p=fftwf_plan_many_dft(1,//rank
@@ -26,6 +27,7 @@ void _stdcall MultipleFFT(void* input,void* output,int blocksize,int nblocks,int
 	fftwf_execute(p);
 	fftwf_destroy_plan(p);
 }
+
 bool _stdcall Test()
 {
 	return LoadLibraryA("libfftw3f-3.dll")!=NULL;

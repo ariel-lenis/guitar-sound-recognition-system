@@ -1,0 +1,7 @@
+These DLLs were created by us, cross-compiled from GNU/Linux using MinGW; the 64-bit version is possible thanks to the mingw-w64 project. You should be able to call them from any compiler. In order to link to them from Visual C++, you will need to create .lib "import libraries" using the lib.exe program included with VC++. Run:
+     lib /def:libfftw3-3.def
+     lib /def:libfftw3f-3.def
+     lib /def:libfftw3l-3.def
+On Visual Studio 2008 in 64-bit mode, and possibly in other cases, you may need to specify the machine explicitly:
+
+     lib /machine:x64 /def:libfftw3l-3.def
