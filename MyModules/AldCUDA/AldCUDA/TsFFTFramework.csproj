@@ -57,46 +57,40 @@
     <Compile Include="Windows.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\TsCudaDll\Debug\libfftw3-3.dll">
+    <Content Include="..\..\..\Dlls\cudart32_65.dll">
+      <Link>cudart32_65.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\Dlls\cudart64_65.dll">
+      <Link>cudart64_65.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\ExternModules\fftw-3.3.5-dll32\libfftw3-3.dll">
       <Link>libfftw3-3.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\TsCudaDll\Debug\libfftw3f-3.dll">
+    </Content>
+    <Content Include="..\..\..\ExternModules\fftw-3.3.5-dll32\libfftw3f-3.dll">
       <Link>libfftw3f-3.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\TsCudaDll\Debug\libfftw3l-3.dll">
+    </Content>
+    <Content Include="..\..\..\ExternModules\fftw-3.3.5-dll32\libfftw3l-3.dll">
       <Link>libfftw3l-3.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\TsFFTWDll\Release\TsFFTWDll.dll">
-      <Link>TsFFTWDll.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\TsCudaDll\Release\cudart32_55.dll">
-      <Link>cudart32_55.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\TsCudaDll\Release\cudart64_55.dll">
-      <Link>cudart64_55.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\..\TsCudaDll\Release\TsCudaDll.dll">
+    </Content>
+    <Content Include="..\..\TsCudaDll\Debug\TsCudaDll.dll">
       <Link>TsCudaDll.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\TsFFTWDll\Debug\TsFFTWDll.dll">
+      <Link>TsFFTWDll.dll</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cufft32_55.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="cufft64_55.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\..\TsCudaDll\TsCudaDll\TsCudaDll.vcxproj">
+      <Project>{9189472a-18c1-4717-b8ad-e913fa05ebaa}</Project>
+      <Name>TsCudaDll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TsFFTWDll\TsFFTWDll\TsFFTWDll.vcxproj">
+      <Project>{09d47d1b-488b-4073-aa4a-0693d10f5d53}</Project>
+      <Name>TsFFTWDll</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

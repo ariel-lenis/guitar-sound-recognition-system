@@ -19,6 +19,7 @@ using System.Runtime.InteropServices;
 using TsExtraControls;
 using TsFilesTools;
 using AldSpecialAlgorithms;
+using TsFFTFramework;
 
 namespace WavAnalizerContainer
 {
@@ -38,6 +39,12 @@ namespace WavAnalizerContainer
         {
             InitializeComponent();
             this.SourceInitialized += MainWindow_SourceInitialized;
+
+            if (!TsFFTLink.LoadModule(TsFFTLink.Modules.CudaFFT))
+            {
+                MessageBox.Show("Cannot load the FFT libraries.");
+                Application.Current.Shutdown(1);
+            }
         }
 
         void resizingwd_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -73,7 +80,7 @@ namespace WavAnalizerContainer
             plotter.DisableZoom();
         }
 
-        void OpenFile(AldTrainingSet who)
+        void OpenFile(TsTrainingSet who)
         {
             if (currentTrainingSet != null) currentTrainingSet.UnloadFilesInformation();
             currentTrainingSet = who;
@@ -102,9 +109,9 @@ namespace WavAnalizerContainer
             if (this.fileBrowser.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
             this.gridFiles.ItemsSource = null;
 
-            wavesInfos = new List<AldTrainingSet >();
+            wavesInfos = new List<TsTrainingSet >();
             foreach (var i in Directory.EnumerateFiles(this.fileBrowser.SelectedPath, "*.wav"))
-                wavesInfos.Add(new AldTrainingSet(i));
+                wavesInfos.Add(new TsTrainingSet(i));
             this.gridFiles.ItemsSource = wavesInfos;
         }
         private void btnFFT_Click(object sender, RoutedEventArgs e)
@@ -172,7 +179,7 @@ namespace WavAnalizerContainer
         private void gridFiles_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (gridFiles.SelectedIndex < 0) return;
-            OpenFile(gridFiles.SelectedValue as AldTrainingSet);
+            OpenFile(gridFiles.SelectedValue as TsTrainingSet);
         }
 
         private void sliderAdjust_MouseUp(object sender, MouseButtonEventArgs e)
@@ -191,10 +198,10 @@ namespace WavAnalizerContainer
 
         private void btnAdjustTimes_Click(object sender, RoutedEventArgs e)
         {
-            AldToolsMarkers.Adjust(currentTrainingSet);
+            TsToolsMarkers.Adjust(currentTrainingSet);
             aldCompleteDisplayer1.RenderAll();
             ReloadGrid();
-            //var time = AldToolsMarkers.GetFirstNoteTime(currentTrainingSet);
+            //var time = TsToolsMarkers.GetFirstNoteTime(currentTrainingSet);
             //MessageBox.Show(time.ToString());
         }
 
@@ -213,7 +220,7 @@ namespace WavAnalizerContainer
                     if (wavesInfos[i] != currentTrainingSet)
                         wavesInfos[i].LoadFilesInformation();
 
-                    AldToolsMarkers.Adjust(wavesInfos[i]);
+                    TsToolsMarkers.Adjust(wavesInfos[i]);
 
                     wavesInfos[i].SaveAdjust(); 
 
